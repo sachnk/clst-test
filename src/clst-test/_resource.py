@@ -7,13 +7,13 @@ import anyio
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from ._client import ClstTest, AsyncClstTest
+    from ._client import Clearstreet, AsyncClearstreet
 
 
 class SyncAPIResource:
-    _client: ClstTest
+    _client: Clearstreet
 
-    def __init__(self, client: ClstTest) -> None:
+    def __init__(self, client: Clearstreet) -> None:
         self._client = client
         self._get = client.get
         self._post = client.post
@@ -27,9 +27,9 @@ class SyncAPIResource:
 
 
 class AsyncAPIResource:
-    _client: AsyncClstTest
+    _client: AsyncClearstreet
 
-    def __init__(self, client: AsyncClstTest) -> None:
+    def __init__(self, client: AsyncClearstreet) -> None:
         self._client = client
         self._get = client.get
         self._post = client.post

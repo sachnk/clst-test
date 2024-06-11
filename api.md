@@ -10,19 +10,9 @@ Methods:
 
 - <code title="get /entities/{entity_id}">client.entities.<a href="./src/clst-test/resources/entities/entities.py">retrieve</a>(entity_id) -> <a href="./src/clst-test/types/entity.py">Entity</a></code>
 - <code title="get /entities">client.entities.<a href="./src/clst-test/resources/entities/entities.py">list</a>() -> <a href="./src/clst-test/types/entity_list_response.py">EntityListResponse</a></code>
-- <code title="get /entities/{entity_id}/pnl-summary">client.entities.<a href="./src/clst-test/resources/entities/entities.py">pnl_summary</a>(entity_id) -> <a href="./src/clst-test/types/pnl_summary.py">PnlSummary</a></code>
-
-## RegtMargin
-
-Methods:
-
-- <code title="get /entities/{entity_id}/regt-margin">client.entities.regt_margin.<a href="./src/clst-test/resources/entities/regt_margin.py">retrieve</a>(entity_id) -> <a href="./src/clst-test/types/regt_margin.py">RegtMargin</a></code>
-
-## PortfolioMargin
-
-Methods:
-
-- <code title="get /entities/{entity_id}/portfolio-margin">client.entities.portfolio_margin.<a href="./src/clst-test/resources/entities/portfolio_margin.py">retrieve</a>(entity_id) -> <a href="./src/clst-test/types/portfolio_margin.py">PortfolioMargin</a></code>
+- <code title="get /entities/{entity_id}/pnl-summary">client.entities.<a href="./src/clst-test/resources/entities/entities.py">get_pnl_summary</a>(entity_id) -> <a href="./src/clst-test/types/pnl_summary.py">PnlSummary</a></code>
+- <code title="get /entities/{entity_id}/portfolio-margin">client.entities.<a href="./src/clst-test/resources/entities/entities.py">get_portfolio_margin</a>(entity_id) -> <a href="./src/clst-test/types/portfolio_margin.py">PortfolioMargin</a></code>
+- <code title="get /entities/{entity_id}/regt-margin">client.entities.<a href="./src/clst-test/resources/entities/entities.py">get_regt_margin</a>(entity_id) -> <a href="./src/clst-test/types/regt_margin.py">RegtMargin</a></code>
 
 ## RegtMarginSimulations
 

@@ -14,7 +14,7 @@ from ._exceptions import APIError
 from ._response import APIResponse, AsyncAPIResponse
 
 if TYPE_CHECKING:
-    from ._client import ClstTest, AsyncClstTest
+    from ._client import Clearstreet, AsyncClearstreet
 
 
 _T = TypeVar("_T")
@@ -32,7 +32,7 @@ class Stream(Generic[_T]):
         *,
         cast_to: type[_T],
         response: httpx.Response,
-        client: ClstTest,
+        client: Clearstreet,
     ) -> None:
         self.response = response
         self._cast_to = cast_to
@@ -95,7 +95,7 @@ class AsyncStream(Generic[_T]):
         *,
         cast_to: type[_T],
         response: httpx.Response,
-        client: AsyncClstTest,
+        client: AsyncClearstreet,
     ) -> None:
         self.response = response
         self._cast_to = cast_to

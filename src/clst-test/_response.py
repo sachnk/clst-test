@@ -30,7 +30,7 @@ from ._streaming import extract_stream_chunk_type
 from ._models import BaseModel, is_basemodel
 from ._constants import RAW_RESPONSE_HEADER, OVERRIDE_CAST_TO_HEADER
 from ._streaming import Stream, AsyncStream, is_stream_class_type, extract_stream_chunk_type
-from ._exceptions import ClstTestError, APIResponseValidationError
+from ._exceptions import ClearstreetError, APIResponseValidationError
 
 if TYPE_CHECKING:
     from ._models import FinalRequestOptions
@@ -551,7 +551,7 @@ class MissingStreamClassError(TypeError):
         )
 
 
-class StreamAlreadyConsumed(ClstTestError):
+class StreamAlreadyConsumed(ClearstreetError):
     """
     Attempted to read or stream content, but the content has already
     been streamed.

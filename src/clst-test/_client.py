@@ -8,7 +8,7 @@ import os
 
 from ._streaming import AsyncStream as AsyncStream, Stream as Stream
 
-from ._exceptions import ClstTestError, APIStatusError
+from ._exceptions import ClearstreetError, APIStatusError
 
 from typing_extensions import override, Self
 
@@ -71,19 +71,19 @@ __all__ = [
     "ProxiesTypes",
     "RequestOptions",
     "resources",
-    "ClstTest",
-    "AsyncClstTest",
+    "Clearstreet",
+    "AsyncClearstreet",
     "Client",
     "AsyncClient",
 ]
 
 
-class ClstTest(SyncAPIClient):
+class Clearstreet(SyncAPIClient):
     entities: resources.EntitiesResource
     accounts: resources.AccountsResource
     instruments: resources.InstrumentsResource
-    with_raw_response: ClstTestWithRawResponse
-    with_streaming_response: ClstTestWithStreamedResponse
+    with_raw_response: ClearstreetWithRawResponse
+    with_streaming_response: ClearstreetWithStreamedResponse
 
     # client options
     bearer_token: str
@@ -111,20 +111,20 @@ class ClstTest(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous clst-test client instance.
+        """Construct a new synchronous clearstreet client instance.
 
         This automatically infers the `bearer_token` argument from the `CLST_TEST_BEARER_TOKEN` environment variable if it is not provided.
         """
         if bearer_token is None:
             bearer_token = os.environ.get("CLST_TEST_BEARER_TOKEN")
         if bearer_token is None:
-            raise ClstTestError(
+            raise ClearstreetError(
                 "The bearer_token client option must be set either by passing bearer_token to the client or by setting the CLST_TEST_BEARER_TOKEN environment variable"
             )
         self.bearer_token = bearer_token
 
         if base_url is None:
-            base_url = os.environ.get("CLST_TEST_BASE_URL")
+            base_url = os.environ.get("CLEARSTREET_BASE_URL")
         if base_url is None:
             base_url = f"http://api.clearstreet.io/studio/v2"
 
@@ -142,8 +142,8 @@ class ClstTest(SyncAPIClient):
         self.entities = resources.EntitiesResource(self)
         self.accounts = resources.AccountsResource(self)
         self.instruments = resources.InstrumentsResource(self)
-        self.with_raw_response = ClstTestWithRawResponse(self)
-        self.with_streaming_response = ClstTestWithStreamedResponse(self)
+        self.with_raw_response = ClearstreetWithRawResponse(self)
+        self.with_streaming_response = ClearstreetWithStreamedResponse(self)
 
     @property
     @override
@@ -250,12 +250,12 @@ class ClstTest(SyncAPIClient):
         return APIStatusError(err_msg, response=response, body=body)
 
 
-class AsyncClstTest(AsyncAPIClient):
+class AsyncClearstreet(AsyncAPIClient):
     entities: resources.AsyncEntitiesResource
     accounts: resources.AsyncAccountsResource
     instruments: resources.AsyncInstrumentsResource
-    with_raw_response: AsyncClstTestWithRawResponse
-    with_streaming_response: AsyncClstTestWithStreamedResponse
+    with_raw_response: AsyncClearstreetWithRawResponse
+    with_streaming_response: AsyncClearstreetWithStreamedResponse
 
     # client options
     bearer_token: str
@@ -283,20 +283,20 @@ class AsyncClstTest(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async clst-test client instance.
+        """Construct a new async clearstreet client instance.
 
         This automatically infers the `bearer_token` argument from the `CLST_TEST_BEARER_TOKEN` environment variable if it is not provided.
         """
         if bearer_token is None:
             bearer_token = os.environ.get("CLST_TEST_BEARER_TOKEN")
         if bearer_token is None:
-            raise ClstTestError(
+            raise ClearstreetError(
                 "The bearer_token client option must be set either by passing bearer_token to the client or by setting the CLST_TEST_BEARER_TOKEN environment variable"
             )
         self.bearer_token = bearer_token
 
         if base_url is None:
-            base_url = os.environ.get("CLST_TEST_BASE_URL")
+            base_url = os.environ.get("CLEARSTREET_BASE_URL")
         if base_url is None:
             base_url = f"http://api.clearstreet.io/studio/v2"
 
@@ -314,8 +314,8 @@ class AsyncClstTest(AsyncAPIClient):
         self.entities = resources.AsyncEntitiesResource(self)
         self.accounts = resources.AsyncAccountsResource(self)
         self.instruments = resources.AsyncInstrumentsResource(self)
-        self.with_raw_response = AsyncClstTestWithRawResponse(self)
-        self.with_streaming_response = AsyncClstTestWithStreamedResponse(self)
+        self.with_raw_response = AsyncClearstreetWithRawResponse(self)
+        self.with_streaming_response = AsyncClearstreetWithStreamedResponse(self)
 
     @property
     @override
@@ -422,34 +422,34 @@ class AsyncClstTest(AsyncAPIClient):
         return APIStatusError(err_msg, response=response, body=body)
 
 
-class ClstTestWithRawResponse:
-    def __init__(self, client: ClstTest) -> None:
+class ClearstreetWithRawResponse:
+    def __init__(self, client: Clearstreet) -> None:
         self.entities = resources.EntitiesResourceWithRawResponse(client.entities)
         self.accounts = resources.AccountsResourceWithRawResponse(client.accounts)
         self.instruments = resources.InstrumentsResourceWithRawResponse(client.instruments)
 
 
-class AsyncClstTestWithRawResponse:
-    def __init__(self, client: AsyncClstTest) -> None:
+class AsyncClearstreetWithRawResponse:
+    def __init__(self, client: AsyncClearstreet) -> None:
         self.entities = resources.AsyncEntitiesResourceWithRawResponse(client.entities)
         self.accounts = resources.AsyncAccountsResourceWithRawResponse(client.accounts)
         self.instruments = resources.AsyncInstrumentsResourceWithRawResponse(client.instruments)
 
 
-class ClstTestWithStreamedResponse:
-    def __init__(self, client: ClstTest) -> None:
+class ClearstreetWithStreamedResponse:
+    def __init__(self, client: Clearstreet) -> None:
         self.entities = resources.EntitiesResourceWithStreamingResponse(client.entities)
         self.accounts = resources.AccountsResourceWithStreamingResponse(client.accounts)
         self.instruments = resources.InstrumentsResourceWithStreamingResponse(client.instruments)
 
 
-class AsyncClstTestWithStreamedResponse:
-    def __init__(self, client: AsyncClstTest) -> None:
+class AsyncClearstreetWithStreamedResponse:
+    def __init__(self, client: AsyncClearstreet) -> None:
         self.entities = resources.AsyncEntitiesResourceWithStreamingResponse(client.entities)
         self.accounts = resources.AsyncAccountsResourceWithStreamingResponse(client.accounts)
         self.instruments = resources.AsyncInstrumentsResourceWithStreamingResponse(client.instruments)
 
 
-Client = ClstTest
+Client = Clearstreet
 
-AsyncClient = AsyncClstTest
+AsyncClient = AsyncClearstreet
