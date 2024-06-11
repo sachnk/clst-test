@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from clst-test import Clearstreet, AsyncClearstreet
 
-from clst-test.types import Entity, EntityListResponse, PNLSummary, PortfolioMargin, RegTMargin
+from clst-test.types import Entity, EntityListResponse, EntityCreateRegTMarginSimulationResponse, PNLSummary, PortfolioMargin, RegTMargin, RegTMarginSimulation
 
 from typing import Any, cast
 
@@ -16,6 +16,7 @@ from typing import Optional
 from respx import MockRouter
 from clst-test import Clearstreet, AsyncClearstreet
 from tests.utils import assert_matches_type
+from clst-test.types import entity_create_regt_margin_simulation_params
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -87,6 +88,90 @@ class TestEntities:
             assert_matches_type(EntityListResponse, entity, path=['response'])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_create_regt_margin_simulation(self, client: Clearstreet) -> None:
+        entity = client.entities.create_regt_margin_simulation(
+            "x",
+            name="string",
+        )
+        assert_matches_type(EntityCreateRegTMarginSimulationResponse, entity, path=['response'])
+
+    @parametrize
+    def test_method_create_regt_margin_simulation_with_all_params(self, client: Clearstreet) -> None:
+        entity = client.entities.create_regt_margin_simulation(
+            "x",
+            name="string",
+            ignore_existing=True,
+            prices=[{
+                "symbol": "AAPL",
+                "symbol_format": "cms",
+                "price": "x",
+            }, {
+                "symbol": "AAPL",
+                "symbol_format": "cms",
+                "price": "x",
+            }, {
+                "symbol": "AAPL",
+                "symbol_format": "cms",
+                "price": "x",
+            }],
+            trades=[{
+                "symbol": "AAPL",
+                "symbol_format": "cms",
+                "side": "buy",
+                "quantity": "x",
+                "price": "x",
+            }, {
+                "symbol": "AAPL",
+                "symbol_format": "cms",
+                "side": "buy",
+                "quantity": "x",
+                "price": "x",
+            }, {
+                "symbol": "AAPL",
+                "symbol_format": "cms",
+                "side": "buy",
+                "quantity": "x",
+                "price": "x",
+            }],
+        )
+        assert_matches_type(EntityCreateRegTMarginSimulationResponse, entity, path=['response'])
+
+    @parametrize
+    def test_raw_response_create_regt_margin_simulation(self, client: Clearstreet) -> None:
+
+        response = client.entities.with_raw_response.create_regt_margin_simulation(
+            "x",
+            name="string",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
+        entity = response.parse()
+        assert_matches_type(EntityCreateRegTMarginSimulationResponse, entity, path=['response'])
+
+    @parametrize
+    def test_streaming_response_create_regt_margin_simulation(self, client: Clearstreet) -> None:
+        with client.entities.with_streaming_response.create_regt_margin_simulation(
+            "x",
+            name="string",
+        ) as response :
+            assert not response.is_closed
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
+
+            entity = response.parse()
+            assert_matches_type(EntityCreateRegTMarginSimulationResponse, entity, path=['response'])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_create_regt_margin_simulation(self, client: Clearstreet) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `entity_id` but received ''"):
+          client.entities.with_raw_response.create_regt_margin_simulation(
+              "",
+              name="string",
+          )
 
     @parametrize
     def test_method_get_pnl_summary(self, client: Clearstreet) -> None:
@@ -204,6 +289,55 @@ class TestEntities:
           client.entities.with_raw_response.get_regt_margin(
               "",
           )
+
+    @parametrize
+    def test_method_get_regt_margin_simulation(self, client: Clearstreet) -> None:
+        entity = client.entities.get_regt_margin_simulation(
+            "6460030d-8ed4-19d3-818e-e87b36e90005",
+            entity_id="x",
+        )
+        assert_matches_type(RegTMarginSimulation, entity, path=['response'])
+
+    @parametrize
+    def test_raw_response_get_regt_margin_simulation(self, client: Clearstreet) -> None:
+
+        response = client.entities.with_raw_response.get_regt_margin_simulation(
+            "6460030d-8ed4-19d3-818e-e87b36e90005",
+            entity_id="x",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
+        entity = response.parse()
+        assert_matches_type(RegTMarginSimulation, entity, path=['response'])
+
+    @parametrize
+    def test_streaming_response_get_regt_margin_simulation(self, client: Clearstreet) -> None:
+        with client.entities.with_streaming_response.get_regt_margin_simulation(
+            "6460030d-8ed4-19d3-818e-e87b36e90005",
+            entity_id="x",
+        ) as response :
+            assert not response.is_closed
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
+
+            entity = response.parse()
+            assert_matches_type(RegTMarginSimulation, entity, path=['response'])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_get_regt_margin_simulation(self, client: Clearstreet) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `entity_id` but received ''"):
+          client.entities.with_raw_response.get_regt_margin_simulation(
+              "6460030d-8ed4-19d3-818e-e87b36e90005",
+              entity_id="",
+          )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `simulation_id` but received ''"):
+          client.entities.with_raw_response.get_regt_margin_simulation(
+              "",
+              entity_id="x",
+          )
 class TestAsyncEntities:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=['loose', 'strict'])
 
@@ -272,6 +406,90 @@ class TestAsyncEntities:
             assert_matches_type(EntityListResponse, entity, path=['response'])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_create_regt_margin_simulation(self, async_client: AsyncClearstreet) -> None:
+        entity = await async_client.entities.create_regt_margin_simulation(
+            "x",
+            name="string",
+        )
+        assert_matches_type(EntityCreateRegTMarginSimulationResponse, entity, path=['response'])
+
+    @parametrize
+    async def test_method_create_regt_margin_simulation_with_all_params(self, async_client: AsyncClearstreet) -> None:
+        entity = await async_client.entities.create_regt_margin_simulation(
+            "x",
+            name="string",
+            ignore_existing=True,
+            prices=[{
+                "symbol": "AAPL",
+                "symbol_format": "cms",
+                "price": "x",
+            }, {
+                "symbol": "AAPL",
+                "symbol_format": "cms",
+                "price": "x",
+            }, {
+                "symbol": "AAPL",
+                "symbol_format": "cms",
+                "price": "x",
+            }],
+            trades=[{
+                "symbol": "AAPL",
+                "symbol_format": "cms",
+                "side": "buy",
+                "quantity": "x",
+                "price": "x",
+            }, {
+                "symbol": "AAPL",
+                "symbol_format": "cms",
+                "side": "buy",
+                "quantity": "x",
+                "price": "x",
+            }, {
+                "symbol": "AAPL",
+                "symbol_format": "cms",
+                "side": "buy",
+                "quantity": "x",
+                "price": "x",
+            }],
+        )
+        assert_matches_type(EntityCreateRegTMarginSimulationResponse, entity, path=['response'])
+
+    @parametrize
+    async def test_raw_response_create_regt_margin_simulation(self, async_client: AsyncClearstreet) -> None:
+
+        response = await async_client.entities.with_raw_response.create_regt_margin_simulation(
+            "x",
+            name="string",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
+        entity = await response.parse()
+        assert_matches_type(EntityCreateRegTMarginSimulationResponse, entity, path=['response'])
+
+    @parametrize
+    async def test_streaming_response_create_regt_margin_simulation(self, async_client: AsyncClearstreet) -> None:
+        async with async_client.entities.with_streaming_response.create_regt_margin_simulation(
+            "x",
+            name="string",
+        ) as response :
+            assert not response.is_closed
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
+
+            entity = await response.parse()
+            assert_matches_type(EntityCreateRegTMarginSimulationResponse, entity, path=['response'])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_create_regt_margin_simulation(self, async_client: AsyncClearstreet) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `entity_id` but received ''"):
+          await async_client.entities.with_raw_response.create_regt_margin_simulation(
+              "",
+              name="string",
+          )
 
     @parametrize
     async def test_method_get_pnl_summary(self, async_client: AsyncClearstreet) -> None:
@@ -388,4 +606,53 @@ class TestAsyncEntities:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entity_id` but received ''"):
           await async_client.entities.with_raw_response.get_regt_margin(
               "",
+          )
+
+    @parametrize
+    async def test_method_get_regt_margin_simulation(self, async_client: AsyncClearstreet) -> None:
+        entity = await async_client.entities.get_regt_margin_simulation(
+            "6460030d-8ed4-19d3-818e-e87b36e90005",
+            entity_id="x",
+        )
+        assert_matches_type(RegTMarginSimulation, entity, path=['response'])
+
+    @parametrize
+    async def test_raw_response_get_regt_margin_simulation(self, async_client: AsyncClearstreet) -> None:
+
+        response = await async_client.entities.with_raw_response.get_regt_margin_simulation(
+            "6460030d-8ed4-19d3-818e-e87b36e90005",
+            entity_id="x",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
+        entity = await response.parse()
+        assert_matches_type(RegTMarginSimulation, entity, path=['response'])
+
+    @parametrize
+    async def test_streaming_response_get_regt_margin_simulation(self, async_client: AsyncClearstreet) -> None:
+        async with async_client.entities.with_streaming_response.get_regt_margin_simulation(
+            "6460030d-8ed4-19d3-818e-e87b36e90005",
+            entity_id="x",
+        ) as response :
+            assert not response.is_closed
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
+
+            entity = await response.parse()
+            assert_matches_type(RegTMarginSimulation, entity, path=['response'])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_get_regt_margin_simulation(self, async_client: AsyncClearstreet) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `entity_id` but received ''"):
+          await async_client.entities.with_raw_response.get_regt_margin_simulation(
+              "6460030d-8ed4-19d3-818e-e87b36e90005",
+              entity_id="",
+          )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `simulation_id` but received ''"):
+          await async_client.entities.with_raw_response.get_regt_margin_simulation(
+              "",
+              entity_id="x",
           )
