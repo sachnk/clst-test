@@ -6,13 +6,13 @@ import httpx
 
 from ..._compat import cached_property
 
-from ...types.entities.regt_margin_simulation_create_response import RegtMarginSimulationCreateResponse
+from ...types.entities.regt_margin_simulation_create_response import RegTMarginSimulationCreateResponse
 
 from ..._utils import maybe_transform, async_maybe_transform
 
 from typing import Iterable
 
-from ...types.entities.regt_margin_simulation import RegtMarginSimulation
+from ...types.entities.regt_margin_simulation import RegTMarginSimulation
 
 from ...types.entities.simulation_id import SimulationID
 
@@ -43,17 +43,17 @@ from ...types import shared_params
 from ...types.entities import regt_margin_simulation_create_params
 from ...types.entities import SimulationID
 
-__all__ = ["RegtMarginSimulationsResource", "AsyncRegtMarginSimulationsResource"]
+__all__ = ["RegTMarginSimulationsResource", "AsyncRegTMarginSimulationsResource"]
 
 
-class RegtMarginSimulationsResource(SyncAPIResource):
+class RegTMarginSimulationsResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> RegtMarginSimulationsResourceWithRawResponse:
-        return RegtMarginSimulationsResourceWithRawResponse(self)
+    def with_raw_response(self) -> RegTMarginSimulationsResourceWithRawResponse:
+        return RegTMarginSimulationsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> RegtMarginSimulationsResourceWithStreamingResponse:
-        return RegtMarginSimulationsResourceWithStreamingResponse(self)
+    def with_streaming_response(self) -> RegTMarginSimulationsResourceWithStreamingResponse:
+        return RegTMarginSimulationsResourceWithStreamingResponse(self)
 
     def create(
         self,
@@ -69,7 +69,7 @@ class RegtMarginSimulationsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> RegtMarginSimulationCreateResponse:
+    ) -> RegTMarginSimulationCreateResponse:
         """
         Simulate Reg-T margin calculation for a given hypothetical set of prices and/or
         trades. This is useful for understanding the impact of price fluctuations or
@@ -113,12 +113,12 @@ class RegtMarginSimulationsResource(SyncAPIResource):
                     "prices": prices,
                     "trades": trades,
                 },
-                regt_margin_simulation_create_params.RegtMarginSimulationCreateParams,
+                regt_margin_simulation_create_params.RegTMarginSimulationCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=RegtMarginSimulationCreateResponse,
+            cast_to=RegTMarginSimulationCreateResponse,
         )
 
     def retrieve(
@@ -132,7 +132,7 @@ class RegtMarginSimulationsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> RegtMarginSimulation:
+    ) -> RegTMarginSimulation:
         """Get a Reg-T margin simluation that was previously created.
 
         Note, simulations are
@@ -160,18 +160,18 @@ class RegtMarginSimulationsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=RegtMarginSimulation,
+            cast_to=RegTMarginSimulation,
         )
 
 
-class AsyncRegtMarginSimulationsResource(AsyncAPIResource):
+class AsyncRegTMarginSimulationsResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncRegtMarginSimulationsResourceWithRawResponse:
-        return AsyncRegtMarginSimulationsResourceWithRawResponse(self)
+    def with_raw_response(self) -> AsyncRegTMarginSimulationsResourceWithRawResponse:
+        return AsyncRegTMarginSimulationsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncRegtMarginSimulationsResourceWithStreamingResponse:
-        return AsyncRegtMarginSimulationsResourceWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncRegTMarginSimulationsResourceWithStreamingResponse:
+        return AsyncRegTMarginSimulationsResourceWithStreamingResponse(self)
 
     async def create(
         self,
@@ -187,7 +187,7 @@ class AsyncRegtMarginSimulationsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> RegtMarginSimulationCreateResponse:
+    ) -> RegTMarginSimulationCreateResponse:
         """
         Simulate Reg-T margin calculation for a given hypothetical set of prices and/or
         trades. This is useful for understanding the impact of price fluctuations or
@@ -231,12 +231,12 @@ class AsyncRegtMarginSimulationsResource(AsyncAPIResource):
                     "prices": prices,
                     "trades": trades,
                 },
-                regt_margin_simulation_create_params.RegtMarginSimulationCreateParams,
+                regt_margin_simulation_create_params.RegTMarginSimulationCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=RegtMarginSimulationCreateResponse,
+            cast_to=RegTMarginSimulationCreateResponse,
         )
 
     async def retrieve(
@@ -250,7 +250,7 @@ class AsyncRegtMarginSimulationsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> RegtMarginSimulation:
+    ) -> RegTMarginSimulation:
         """Get a Reg-T margin simluation that was previously created.
 
         Note, simulations are
@@ -278,12 +278,12 @@ class AsyncRegtMarginSimulationsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=RegtMarginSimulation,
+            cast_to=RegTMarginSimulation,
         )
 
 
-class RegtMarginSimulationsResourceWithRawResponse:
-    def __init__(self, regt_margin_simulations: RegtMarginSimulationsResource) -> None:
+class RegTMarginSimulationsResourceWithRawResponse:
+    def __init__(self, regt_margin_simulations: RegTMarginSimulationsResource) -> None:
         self._regt_margin_simulations = regt_margin_simulations
 
         self.create = to_raw_response_wrapper(
@@ -294,8 +294,8 @@ class RegtMarginSimulationsResourceWithRawResponse:
         )
 
 
-class AsyncRegtMarginSimulationsResourceWithRawResponse:
-    def __init__(self, regt_margin_simulations: AsyncRegtMarginSimulationsResource) -> None:
+class AsyncRegTMarginSimulationsResourceWithRawResponse:
+    def __init__(self, regt_margin_simulations: AsyncRegTMarginSimulationsResource) -> None:
         self._regt_margin_simulations = regt_margin_simulations
 
         self.create = async_to_raw_response_wrapper(
@@ -306,8 +306,8 @@ class AsyncRegtMarginSimulationsResourceWithRawResponse:
         )
 
 
-class RegtMarginSimulationsResourceWithStreamingResponse:
-    def __init__(self, regt_margin_simulations: RegtMarginSimulationsResource) -> None:
+class RegTMarginSimulationsResourceWithStreamingResponse:
+    def __init__(self, regt_margin_simulations: RegTMarginSimulationsResource) -> None:
         self._regt_margin_simulations = regt_margin_simulations
 
         self.create = to_streamed_response_wrapper(
@@ -318,8 +318,8 @@ class RegtMarginSimulationsResourceWithStreamingResponse:
         )
 
 
-class AsyncRegtMarginSimulationsResourceWithStreamingResponse:
-    def __init__(self, regt_margin_simulations: AsyncRegtMarginSimulationsResource) -> None:
+class AsyncRegTMarginSimulationsResourceWithStreamingResponse:
+    def __init__(self, regt_margin_simulations: AsyncRegTMarginSimulationsResource) -> None:
         self._regt_margin_simulations = regt_margin_simulations
 
         self.create = async_to_streamed_response_wrapper(

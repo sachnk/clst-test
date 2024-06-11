@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from clst-test import Clearstreet, AsyncClearstreet
 
-from clst-test.types import Entity, EntityListResponse, PNLSummary, PortfolioMargin, RegtMargin
+from clst-test.types import Entity, EntityListResponse, PNLSummary, PortfolioMargin, RegTMargin
 
 from typing import Any, cast
 
@@ -171,7 +171,7 @@ class TestEntities:
         entity = client.entities.get_regt_margin(
             "x",
         )
-        assert_matches_type(RegtMargin, entity, path=['response'])
+        assert_matches_type(RegTMargin, entity, path=['response'])
 
     @parametrize
     def test_raw_response_get_regt_margin(self, client: Clearstreet) -> None:
@@ -183,7 +183,7 @@ class TestEntities:
         assert response.is_closed is True
         assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         entity = response.parse()
-        assert_matches_type(RegtMargin, entity, path=['response'])
+        assert_matches_type(RegTMargin, entity, path=['response'])
 
     @parametrize
     def test_streaming_response_get_regt_margin(self, client: Clearstreet) -> None:
@@ -194,7 +194,7 @@ class TestEntities:
             assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             entity = response.parse()
-            assert_matches_type(RegtMargin, entity, path=['response'])
+            assert_matches_type(RegTMargin, entity, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -356,7 +356,7 @@ class TestAsyncEntities:
         entity = await async_client.entities.get_regt_margin(
             "x",
         )
-        assert_matches_type(RegtMargin, entity, path=['response'])
+        assert_matches_type(RegTMargin, entity, path=['response'])
 
     @parametrize
     async def test_raw_response_get_regt_margin(self, async_client: AsyncClearstreet) -> None:
@@ -368,7 +368,7 @@ class TestAsyncEntities:
         assert response.is_closed is True
         assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         entity = await response.parse()
-        assert_matches_type(RegtMargin, entity, path=['response'])
+        assert_matches_type(RegTMargin, entity, path=['response'])
 
     @parametrize
     async def test_streaming_response_get_regt_margin(self, async_client: AsyncClearstreet) -> None:
@@ -379,7 +379,7 @@ class TestAsyncEntities:
             assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             entity = await response.parse()
-            assert_matches_type(RegtMargin, entity, path=['response'])
+            assert_matches_type(RegTMargin, entity, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 

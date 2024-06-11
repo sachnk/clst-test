@@ -9,9 +9,9 @@ from typing_extensions import Literal
 from pydantic import Field as FieldInfo
 from ...types import shared
 
-__all__ = ["RegtMarginSimulationCreateResponse"]
+__all__ = ["RegTMarginSimulationCreateResponse"]
 
 
-class RegtMarginSimulationCreateResponse(BaseModel):
+class RegTMarginSimulationCreateResponse(BaseModel):
     simulation_id: SimulationID
     """Unique ID for a simulation."""

@@ -11,7 +11,7 @@ from typing_extensions import Literal
 from pydantic import Field as FieldInfo
 from ..types import shared
 
-__all__ = ["RegtMargin", "Group", "GroupMember"]
+__all__ = ["RegTMargin", "Group", "GroupMember"]
 
 
 class GroupMember(BaseModel):
@@ -76,7 +76,7 @@ class Group(BaseModel):
     """Unique name of the group, typically the symbol of the underlier."""
 
 
-class RegtMargin(BaseModel):
+class RegTMargin(BaseModel):
     day_trade_buying_power: float
     """
     The remaining amount of start_of_day_buying_power that captures any day-trading
