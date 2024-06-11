@@ -19,4 +19,4 @@ from .locate_order_list_response import LocateOrderListResponse as LocateOrderLi
 from .locate_order_create_params import LocateOrderCreateParams as LocateOrderCreateParams
 from .locate_order_update_params import LocateOrderUpdateParams as LocateOrderUpdateParams
 from .easy_borrow_list_response import EasyBorrowListResponse as EasyBorrowListResponse
-from .pnl_detail_list_response import PnlDetailListResponse as PnlDetailListResponse
+from .pnl_detail_list_response import PNLDetailListResponse as PNLDetailListResponse

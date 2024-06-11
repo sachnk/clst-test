@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from .entity import Entity as Entity
-from .pnl_summary import PnlSummary as PnlSummary
+from .pnl_summary import PNLSummary as PNLSummary
 from .portfolio_margin import PortfolioMargin as PortfolioMargin
 from .regt_margin import RegtMargin as RegtMargin
 from .entity_list_response import EntityListResponse as EntityListResponse

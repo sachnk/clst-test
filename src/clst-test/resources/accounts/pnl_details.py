@@ -6,7 +6,7 @@ import httpx
 
 from ..._compat import cached_property
 
-from ...types.accounts.pnl_detail_list_response import PnlDetailListResponse
+from ...types.accounts.pnl_detail_list_response import PNLDetailListResponse
 
 from ..._response import (
     to_raw_response_wrapper,
@@ -31,17 +31,17 @@ from ..._base_client import (
 )
 from ...types import shared_params
 
-__all__ = ["PnlDetailsResource", "AsyncPnlDetailsResource"]
+__all__ = ["PNLDetailsResource", "AsyncPNLDetailsResource"]
 
 
-class PnlDetailsResource(SyncAPIResource):
+class PNLDetailsResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> PnlDetailsResourceWithRawResponse:
-        return PnlDetailsResourceWithRawResponse(self)
+    def with_raw_response(self) -> PNLDetailsResourceWithRawResponse:
+        return PNLDetailsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> PnlDetailsResourceWithStreamingResponse:
-        return PnlDetailsResourceWithStreamingResponse(self)
+    def with_streaming_response(self) -> PNLDetailsResourceWithStreamingResponse:
+        return PNLDetailsResourceWithStreamingResponse(self)
 
     def list(
         self,
@@ -53,7 +53,7 @@ class PnlDetailsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> PnlDetailListResponse:
+    ) -> PNLDetailListResponse:
         """
         List PNL details for a given account.
 
@@ -75,18 +75,18 @@ class PnlDetailsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=PnlDetailListResponse,
+            cast_to=PNLDetailListResponse,
         )
 
 
-class AsyncPnlDetailsResource(AsyncAPIResource):
+class AsyncPNLDetailsResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncPnlDetailsResourceWithRawResponse:
-        return AsyncPnlDetailsResourceWithRawResponse(self)
+    def with_raw_response(self) -> AsyncPNLDetailsResourceWithRawResponse:
+        return AsyncPNLDetailsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncPnlDetailsResourceWithStreamingResponse:
-        return AsyncPnlDetailsResourceWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncPNLDetailsResourceWithStreamingResponse:
+        return AsyncPNLDetailsResourceWithStreamingResponse(self)
 
     async def list(
         self,
@@ -98,7 +98,7 @@ class AsyncPnlDetailsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> PnlDetailListResponse:
+    ) -> PNLDetailListResponse:
         """
         List PNL details for a given account.
 
@@ -120,12 +120,12 @@ class AsyncPnlDetailsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=PnlDetailListResponse,
+            cast_to=PNLDetailListResponse,
         )
 
 
-class PnlDetailsResourceWithRawResponse:
-    def __init__(self, pnl_details: PnlDetailsResource) -> None:
+class PNLDetailsResourceWithRawResponse:
+    def __init__(self, pnl_details: PNLDetailsResource) -> None:
         self._pnl_details = pnl_details
 
         self.list = to_raw_response_wrapper(
@@ -133,8 +133,8 @@ class PnlDetailsResourceWithRawResponse:
         )
 
 
-class AsyncPnlDetailsResourceWithRawResponse:
-    def __init__(self, pnl_details: AsyncPnlDetailsResource) -> None:
+class AsyncPNLDetailsResourceWithRawResponse:
+    def __init__(self, pnl_details: AsyncPNLDetailsResource) -> None:
         self._pnl_details = pnl_details
 
         self.list = async_to_raw_response_wrapper(
@@ -142,8 +142,8 @@ class AsyncPnlDetailsResourceWithRawResponse:
         )
 
 
-class PnlDetailsResourceWithStreamingResponse:
-    def __init__(self, pnl_details: PnlDetailsResource) -> None:
+class PNLDetailsResourceWithStreamingResponse:
+    def __init__(self, pnl_details: PNLDetailsResource) -> None:
         self._pnl_details = pnl_details
 
         self.list = to_streamed_response_wrapper(
@@ -151,8 +151,8 @@ class PnlDetailsResourceWithStreamingResponse:
         )
 
 
-class AsyncPnlDetailsResourceWithStreamingResponse:
-    def __init__(self, pnl_details: AsyncPnlDetailsResource) -> None:
+class AsyncPNLDetailsResourceWithStreamingResponse:
+    def __init__(self, pnl_details: AsyncPNLDetailsResource) -> None:
         self._pnl_details = pnl_details
 
         self.list = async_to_streamed_response_wrapper(

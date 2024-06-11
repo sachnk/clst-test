@@ -12,7 +12,7 @@ from ...types.entity import Entity
 
 from ...types.entity_list_response import EntityListResponse
 
-from ...types.pnl_summary import PnlSummary
+from ...types.pnl_summary import PNLSummary
 
 from ...types.portfolio_margin import PortfolioMargin
 
@@ -129,7 +129,7 @@ class EntitiesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> PnlSummary:
+    ) -> PNLSummary:
         """
         Get PNL summary for all accounts in an entity.
 
@@ -151,7 +151,7 @@ class EntitiesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=PnlSummary,
+            cast_to=PNLSummary,
         )
 
     def get_portfolio_margin(
@@ -302,7 +302,7 @@ class AsyncEntitiesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> PnlSummary:
+    ) -> PNLSummary:
         """
         Get PNL summary for all accounts in an entity.
 
@@ -324,7 +324,7 @@ class AsyncEntitiesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=PnlSummary,
+            cast_to=PNLSummary,
         )
 
     async def get_portfolio_margin(

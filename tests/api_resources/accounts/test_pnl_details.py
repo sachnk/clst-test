@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from clst-test import Clearstreet, AsyncClearstreet
 
-from clst-test.types.accounts import PnlDetailListResponse
+from clst-test.types.accounts import PNLDetailListResponse
 
 from typing import Any, cast
 
@@ -19,7 +19,7 @@ from tests.utils import assert_matches_type
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
-class TestPnlDetails:
+class TestPNLDetails:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=['loose', 'strict'])
 
 
@@ -28,7 +28,7 @@ class TestPnlDetails:
         pnl_detail = client.accounts.pnl_details.list(
             "x",
         )
-        assert_matches_type(PnlDetailListResponse, pnl_detail, path=['response'])
+        assert_matches_type(PNLDetailListResponse, pnl_detail, path=['response'])
 
     @parametrize
     def test_raw_response_list(self, client: Clearstreet) -> None:
@@ -40,7 +40,7 @@ class TestPnlDetails:
         assert response.is_closed is True
         assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         pnl_detail = response.parse()
-        assert_matches_type(PnlDetailListResponse, pnl_detail, path=['response'])
+        assert_matches_type(PNLDetailListResponse, pnl_detail, path=['response'])
 
     @parametrize
     def test_streaming_response_list(self, client: Clearstreet) -> None:
@@ -51,7 +51,7 @@ class TestPnlDetails:
             assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             pnl_detail = response.parse()
-            assert_matches_type(PnlDetailListResponse, pnl_detail, path=['response'])
+            assert_matches_type(PNLDetailListResponse, pnl_detail, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -61,7 +61,7 @@ class TestPnlDetails:
           client.accounts.pnl_details.with_raw_response.list(
               "",
           )
-class TestAsyncPnlDetails:
+class TestAsyncPNLDetails:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=['loose', 'strict'])
 
 
@@ -70,7 +70,7 @@ class TestAsyncPnlDetails:
         pnl_detail = await async_client.accounts.pnl_details.list(
             "x",
         )
-        assert_matches_type(PnlDetailListResponse, pnl_detail, path=['response'])
+        assert_matches_type(PNLDetailListResponse, pnl_detail, path=['response'])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncClearstreet) -> None:
@@ -82,7 +82,7 @@ class TestAsyncPnlDetails:
         assert response.is_closed is True
         assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         pnl_detail = await response.parse()
-        assert_matches_type(PnlDetailListResponse, pnl_detail, path=['response'])
+        assert_matches_type(PNLDetailListResponse, pnl_detail, path=['response'])
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncClearstreet) -> None:
@@ -93,7 +93,7 @@ class TestAsyncPnlDetails:
             assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             pnl_detail = await response.parse()
-            assert_matches_type(PnlDetailListResponse, pnl_detail, path=['response'])
+            assert_matches_type(PNLDetailListResponse, pnl_detail, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
