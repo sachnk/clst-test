@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from clst-test import ClstTest, AsyncClstTest
+from clst-test import Clearstreet, AsyncClearstreet
 
 from clst-test.types.entities import RegtMarginSimulationCreateResponse, RegtMarginSimulation
 
@@ -14,7 +14,7 @@ import httpx
 from typing_extensions import get_args
 from typing import Optional
 from respx import MockRouter
-from clst-test import ClstTest, AsyncClstTest
+from clst-test import Clearstreet, AsyncClearstreet
 from tests.utils import assert_matches_type
 from clst-test.types.entities import regt_margin_simulation_create_params
 from clst-test.types.entities import SimulationID
@@ -26,7 +26,7 @@ class TestRegtMarginSimulations:
 
 
     @parametrize
-    def test_method_create(self, client: ClstTest) -> None:
+    def test_method_create(self, client: Clearstreet) -> None:
         regt_margin_simulation = client.entities.regt_margin_simulations.create(
             "x",
             name="string",
@@ -34,7 +34,7 @@ class TestRegtMarginSimulations:
         assert_matches_type(RegtMarginSimulationCreateResponse, regt_margin_simulation, path=['response'])
 
     @parametrize
-    def test_method_create_with_all_params(self, client: ClstTest) -> None:
+    def test_method_create_with_all_params(self, client: Clearstreet) -> None:
         regt_margin_simulation = client.entities.regt_margin_simulations.create(
             "x",
             name="string",
@@ -75,7 +75,7 @@ class TestRegtMarginSimulations:
         assert_matches_type(RegtMarginSimulationCreateResponse, regt_margin_simulation, path=['response'])
 
     @parametrize
-    def test_raw_response_create(self, client: ClstTest) -> None:
+    def test_raw_response_create(self, client: Clearstreet) -> None:
 
         response = client.entities.regt_margin_simulations.with_raw_response.create(
             "x",
@@ -88,7 +88,7 @@ class TestRegtMarginSimulations:
         assert_matches_type(RegtMarginSimulationCreateResponse, regt_margin_simulation, path=['response'])
 
     @parametrize
-    def test_streaming_response_create(self, client: ClstTest) -> None:
+    def test_streaming_response_create(self, client: Clearstreet) -> None:
         with client.entities.regt_margin_simulations.with_streaming_response.create(
             "x",
             name="string",
@@ -102,7 +102,7 @@ class TestRegtMarginSimulations:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_create(self, client: ClstTest) -> None:
+    def test_path_params_create(self, client: Clearstreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entity_id` but received ''"):
           client.entities.regt_margin_simulations.with_raw_response.create(
               "",
@@ -110,7 +110,7 @@ class TestRegtMarginSimulations:
           )
 
     @parametrize
-    def test_method_retrieve(self, client: ClstTest) -> None:
+    def test_method_retrieve(self, client: Clearstreet) -> None:
         regt_margin_simulation = client.entities.regt_margin_simulations.retrieve(
             "6460030d-8ed4-19d3-818e-e87b36e90005",
             entity_id="x",
@@ -118,7 +118,7 @@ class TestRegtMarginSimulations:
         assert_matches_type(RegtMarginSimulation, regt_margin_simulation, path=['response'])
 
     @parametrize
-    def test_raw_response_retrieve(self, client: ClstTest) -> None:
+    def test_raw_response_retrieve(self, client: Clearstreet) -> None:
 
         response = client.entities.regt_margin_simulations.with_raw_response.retrieve(
             "6460030d-8ed4-19d3-818e-e87b36e90005",
@@ -131,7 +131,7 @@ class TestRegtMarginSimulations:
         assert_matches_type(RegtMarginSimulation, regt_margin_simulation, path=['response'])
 
     @parametrize
-    def test_streaming_response_retrieve(self, client: ClstTest) -> None:
+    def test_streaming_response_retrieve(self, client: Clearstreet) -> None:
         with client.entities.regt_margin_simulations.with_streaming_response.retrieve(
             "6460030d-8ed4-19d3-818e-e87b36e90005",
             entity_id="x",
@@ -145,7 +145,7 @@ class TestRegtMarginSimulations:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_retrieve(self, client: ClstTest) -> None:
+    def test_path_params_retrieve(self, client: Clearstreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entity_id` but received ''"):
           client.entities.regt_margin_simulations.with_raw_response.retrieve(
               "6460030d-8ed4-19d3-818e-e87b36e90005",
@@ -162,7 +162,7 @@ class TestAsyncRegtMarginSimulations:
 
 
     @parametrize
-    async def test_method_create(self, async_client: AsyncClstTest) -> None:
+    async def test_method_create(self, async_client: AsyncClearstreet) -> None:
         regt_margin_simulation = await async_client.entities.regt_margin_simulations.create(
             "x",
             name="string",
@@ -170,7 +170,7 @@ class TestAsyncRegtMarginSimulations:
         assert_matches_type(RegtMarginSimulationCreateResponse, regt_margin_simulation, path=['response'])
 
     @parametrize
-    async def test_method_create_with_all_params(self, async_client: AsyncClstTest) -> None:
+    async def test_method_create_with_all_params(self, async_client: AsyncClearstreet) -> None:
         regt_margin_simulation = await async_client.entities.regt_margin_simulations.create(
             "x",
             name="string",
@@ -211,7 +211,7 @@ class TestAsyncRegtMarginSimulations:
         assert_matches_type(RegtMarginSimulationCreateResponse, regt_margin_simulation, path=['response'])
 
     @parametrize
-    async def test_raw_response_create(self, async_client: AsyncClstTest) -> None:
+    async def test_raw_response_create(self, async_client: AsyncClearstreet) -> None:
 
         response = await async_client.entities.regt_margin_simulations.with_raw_response.create(
             "x",
@@ -224,7 +224,7 @@ class TestAsyncRegtMarginSimulations:
         assert_matches_type(RegtMarginSimulationCreateResponse, regt_margin_simulation, path=['response'])
 
     @parametrize
-    async def test_streaming_response_create(self, async_client: AsyncClstTest) -> None:
+    async def test_streaming_response_create(self, async_client: AsyncClearstreet) -> None:
         async with async_client.entities.regt_margin_simulations.with_streaming_response.create(
             "x",
             name="string",
@@ -238,7 +238,7 @@ class TestAsyncRegtMarginSimulations:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_create(self, async_client: AsyncClstTest) -> None:
+    async def test_path_params_create(self, async_client: AsyncClearstreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entity_id` but received ''"):
           await async_client.entities.regt_margin_simulations.with_raw_response.create(
               "",
@@ -246,7 +246,7 @@ class TestAsyncRegtMarginSimulations:
           )
 
     @parametrize
-    async def test_method_retrieve(self, async_client: AsyncClstTest) -> None:
+    async def test_method_retrieve(self, async_client: AsyncClearstreet) -> None:
         regt_margin_simulation = await async_client.entities.regt_margin_simulations.retrieve(
             "6460030d-8ed4-19d3-818e-e87b36e90005",
             entity_id="x",
@@ -254,7 +254,7 @@ class TestAsyncRegtMarginSimulations:
         assert_matches_type(RegtMarginSimulation, regt_margin_simulation, path=['response'])
 
     @parametrize
-    async def test_raw_response_retrieve(self, async_client: AsyncClstTest) -> None:
+    async def test_raw_response_retrieve(self, async_client: AsyncClearstreet) -> None:
 
         response = await async_client.entities.regt_margin_simulations.with_raw_response.retrieve(
             "6460030d-8ed4-19d3-818e-e87b36e90005",
@@ -267,7 +267,7 @@ class TestAsyncRegtMarginSimulations:
         assert_matches_type(RegtMarginSimulation, regt_margin_simulation, path=['response'])
 
     @parametrize
-    async def test_streaming_response_retrieve(self, async_client: AsyncClstTest) -> None:
+    async def test_streaming_response_retrieve(self, async_client: AsyncClearstreet) -> None:
         async with async_client.entities.regt_margin_simulations.with_streaming_response.retrieve(
             "6460030d-8ed4-19d3-818e-e87b36e90005",
             entity_id="x",
@@ -281,7 +281,7 @@ class TestAsyncRegtMarginSimulations:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_retrieve(self, async_client: AsyncClstTest) -> None:
+    async def test_path_params_retrieve(self, async_client: AsyncClearstreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entity_id` but received ''"):
           await async_client.entities.regt_margin_simulations.with_raw_response.retrieve(
               "6460030d-8ed4-19d3-818e-e87b36e90005",

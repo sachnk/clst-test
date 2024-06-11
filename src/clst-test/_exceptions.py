@@ -18,11 +18,11 @@ __all__ = [
 ]
 
 
-class ClstTestError(Exception):
+class ClearstreetError(Exception):
     pass
 
 
-class APIError(ClstTestError):
+class APIError(ClearstreetError):
     message: str
     request: httpx.Request
 

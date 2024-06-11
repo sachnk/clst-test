@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from clst-test import ClstTest, AsyncClstTest
+from clst-test import Clearstreet, AsyncClearstreet
 
 from clst-test.types.accounts import BulkOrderCreateResponse
 
@@ -14,7 +14,7 @@ import httpx
 from typing_extensions import get_args
 from typing import Optional
 from respx import MockRouter
-from clst-test import ClstTest, AsyncClstTest
+from clst-test import Clearstreet, AsyncClearstreet
 from tests.utils import assert_matches_type
 from clst-test.types.accounts import bulk_order_create_params
 
@@ -25,7 +25,7 @@ class TestBulkOrders:
 
 
     @parametrize
-    def test_method_create(self, client: ClstTest) -> None:
+    def test_method_create(self, client: Clearstreet) -> None:
         bulk_order = client.accounts.bulk_orders.create(
             "x",
             orders=[{
@@ -40,7 +40,7 @@ class TestBulkOrders:
         assert_matches_type(BulkOrderCreateResponse, bulk_order, path=['response'])
 
     @parametrize
-    def test_raw_response_create(self, client: ClstTest) -> None:
+    def test_raw_response_create(self, client: Clearstreet) -> None:
 
         response = client.accounts.bulk_orders.with_raw_response.create(
             "x",
@@ -60,7 +60,7 @@ class TestBulkOrders:
         assert_matches_type(BulkOrderCreateResponse, bulk_order, path=['response'])
 
     @parametrize
-    def test_streaming_response_create(self, client: ClstTest) -> None:
+    def test_streaming_response_create(self, client: Clearstreet) -> None:
         with client.accounts.bulk_orders.with_streaming_response.create(
             "x",
             orders=[{
@@ -81,7 +81,7 @@ class TestBulkOrders:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_create(self, client: ClstTest) -> None:
+    def test_path_params_create(self, client: Clearstreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
           client.accounts.bulk_orders.with_raw_response.create(
               "",
@@ -99,7 +99,7 @@ class TestAsyncBulkOrders:
 
 
     @parametrize
-    async def test_method_create(self, async_client: AsyncClstTest) -> None:
+    async def test_method_create(self, async_client: AsyncClearstreet) -> None:
         bulk_order = await async_client.accounts.bulk_orders.create(
             "x",
             orders=[{
@@ -114,7 +114,7 @@ class TestAsyncBulkOrders:
         assert_matches_type(BulkOrderCreateResponse, bulk_order, path=['response'])
 
     @parametrize
-    async def test_raw_response_create(self, async_client: AsyncClstTest) -> None:
+    async def test_raw_response_create(self, async_client: AsyncClearstreet) -> None:
 
         response = await async_client.accounts.bulk_orders.with_raw_response.create(
             "x",
@@ -134,7 +134,7 @@ class TestAsyncBulkOrders:
         assert_matches_type(BulkOrderCreateResponse, bulk_order, path=['response'])
 
     @parametrize
-    async def test_streaming_response_create(self, async_client: AsyncClstTest) -> None:
+    async def test_streaming_response_create(self, async_client: AsyncClearstreet) -> None:
         async with async_client.accounts.bulk_orders.with_streaming_response.create(
             "x",
             orders=[{
@@ -155,7 +155,7 @@ class TestAsyncBulkOrders:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_create(self, async_client: AsyncClstTest) -> None:
+    async def test_path_params_create(self, async_client: AsyncClearstreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
           await async_client.accounts.bulk_orders.with_raw_response.create(
               "",

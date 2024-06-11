@@ -6,7 +6,7 @@ import httpx
 import pytest
 import pydantic
 
-from clst-test import BaseModel, ClstTest, AsyncClstTest
+from clst-test import BaseModel, Clearstreet, AsyncClearstreet
 from clst-test._response import (
     APIResponse,
     BaseAPIResponse,
@@ -60,7 +60,7 @@ class PydanticModel(pydantic.BaseModel):
     ...
 
 
-def test_response_parse_mismatched_basemodel(client: ClstTest) -> None:
+def test_response_parse_mismatched_basemodel(client: Clearstreet) -> None:
     response = APIResponse(
         raw=httpx.Response(200, content=b"foo"),
         client=client,
@@ -78,7 +78,7 @@ def test_response_parse_mismatched_basemodel(client: ClstTest) -> None:
 
 
 @pytest.mark.asyncio
-async def test_async_response_parse_mismatched_basemodel(async_client: AsyncClstTest) -> None:
+async def test_async_response_parse_mismatched_basemodel(async_client: AsyncClearstreet) -> None:
     response = AsyncAPIResponse(
         raw=httpx.Response(200, content=b"foo"),
         client=async_client,
@@ -95,7 +95,7 @@ async def test_async_response_parse_mismatched_basemodel(async_client: AsyncClst
         await response.parse(to=PydanticModel)
 
 
-def test_response_parse_custom_stream(client: ClstTest) -> None:
+def test_response_parse_custom_stream(client: Clearstreet) -> None:
     response = APIResponse(
         raw=httpx.Response(200, content=b"foo"),
         client=client,
@@ -110,7 +110,7 @@ def test_response_parse_custom_stream(client: ClstTest) -> None:
 
 
 @pytest.mark.asyncio
-async def test_async_response_parse_custom_stream(async_client: AsyncClstTest) -> None:
+async def test_async_response_parse_custom_stream(async_client: AsyncClearstreet) -> None:
     response = AsyncAPIResponse(
         raw=httpx.Response(200, content=b"foo"),
         client=async_client,
@@ -129,7 +129,7 @@ class CustomModel(BaseModel):
     bar: int
 
 
-def test_response_parse_custom_model(client: ClstTest) -> None:
+def test_response_parse_custom_model(client: Clearstreet) -> None:
     response = APIResponse(
         raw=httpx.Response(200, content=json.dumps({"foo": "hello!", "bar": 2})),
         client=client,
@@ -145,7 +145,7 @@ def test_response_parse_custom_model(client: ClstTest) -> None:
 
 
 @pytest.mark.asyncio
-async def test_async_response_parse_custom_model(async_client: AsyncClstTest) -> None:
+async def test_async_response_parse_custom_model(async_client: AsyncClearstreet) -> None:
     response = AsyncAPIResponse(
         raw=httpx.Response(200, content=json.dumps({"foo": "hello!", "bar": 2})),
         client=async_client,
@@ -160,7 +160,7 @@ async def test_async_response_parse_custom_model(async_client: AsyncClstTest) ->
     assert obj.bar == 2
 
 
-def test_response_parse_annotated_type(client: ClstTest) -> None:
+def test_response_parse_annotated_type(client: Clearstreet) -> None:
     response = APIResponse(
         raw=httpx.Response(200, content=json.dumps({"foo": "hello!", "bar": 2})),
         client=client,
@@ -177,7 +177,7 @@ def test_response_parse_annotated_type(client: ClstTest) -> None:
     assert obj.bar == 2
 
 
-async def test_async_response_parse_annotated_type(async_client: AsyncClstTest) -> None:
+async def test_async_response_parse_annotated_type(async_client: AsyncClearstreet) -> None:
     response = AsyncAPIResponse(
         raw=httpx.Response(200, content=json.dumps({"foo": "hello!", "bar": 2})),
         client=async_client,

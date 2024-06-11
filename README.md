@@ -1,8 +1,8 @@
-# Clst Test Python API library
+# Clearstreet Python API library
 
 [![PyPI version](https://img.shields.io/pypi/v/clst-test.svg)](https://pypi.org/project/clst-test/)
 
-The Clst Test Python library provides convenient access to the Clst Test REST API from any Python 3.7+
+The Clearstreet Python library provides convenient access to the Clearstreet REST API from any Python 3.7+
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
@@ -27,9 +27,9 @@ pip install git+ssh://git@github.com/stainless-sdks/clst-test-python.git
 The full API of this library can be found in [api.md](api.md).
 
 ```python
-from clst-test import ClstTest
+from clst-test import Clearstreet
 
-client = ClstTest()
+client = Clearstreet()
 
 instrument = client.instruments.retrieve(
     "REPLACE_ME",
@@ -44,13 +44,13 @@ so that your Bearer Token is not stored in source control.
 
 ## Async usage
 
-Simply import `AsyncClstTest` instead of `ClstTest` and use `await` with each API call:
+Simply import `AsyncClearstreet` instead of `Clearstreet` and use `await` with each API call:
 
 ```python
 import asyncio
-from clst-test import AsyncClstTest
+from clst-test import AsyncClearstreet
 
-client = AsyncClstTest()
+client = AsyncClearstreet()
 
 async def main() -> None:
   instrument = await client.instruments.retrieve(
@@ -83,9 +83,9 @@ All errors inherit from `clst-test.APIError`.
 
 ```python
 import clst-test
-from clst-test import ClstTest
+from clst-test import Clearstreet
 
-client = ClstTest()
+client = Clearstreet()
 
 try:
     client.instruments.retrieve(
@@ -124,10 +124,10 @@ Connection errors (for example, due to a network connectivity problem), 408 Requ
 You can use the `max_retries` option to configure or disable retry settings:
 
 ```python
-from clst-test import ClstTest
+from clst-test import Clearstreet
 
 # Configure the default for all requests:
-client = ClstTest(
+client = Clearstreet(
     # default is 2
     max_retries=0,
 )
@@ -144,16 +144,16 @@ By default requests time out after 1 minute. You can configure this with a `time
 which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/#fine-tuning-the-configuration) object:
 
 ```python
-from clst-test import ClstTest
+from clst-test import Clearstreet
 
 # Configure the default for all requests:
-client = ClstTest(
+client = Clearstreet(
     # 20 seconds (default is 1 minute)
     timeout=20.0,
 )
 
 # More granular control:
-client = ClstTest(
+client = Clearstreet(
     timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
 )
 
@@ -173,10 +173,10 @@ Note that requests that time out are [retried twice by default](#retries).
 
 We use the standard library [`logging`](https://docs.python.org/3/library/logging.html) module.
 
-You can enable logging by setting the environment variable `CLST_TEST_LOG` to `debug`.
+You can enable logging by setting the environment variable `CLEARSTREET_LOG` to `debug`.
 
 ```shell
-$ export CLST_TEST_LOG=debug
+$ export CLEARSTREET_LOG=debug
 ```
 
 ### How to tell whether `None` means `null` or missing
@@ -196,9 +196,9 @@ if response.my_field is None:
 The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
 
 ```py
-from clst-test import ClstTest
+from clst-test import Clearstreet
 
-client = ClstTest()
+client = Clearstreet()
 response = client.instruments.with_raw_response.retrieve(
     "REPLACE_ME",
 )
@@ -274,10 +274,10 @@ You can directly override the [httpx client](https://www.python-httpx.org/api/#c
 - Additional [advanced](https://www.python-httpx.org/advanced/#client-instances) functionality
 
 ```python
-from clst-test import ClstTest, DefaultHttpxClient
+from clst-test import Clearstreet, DefaultHttpxClient
 
-client = ClstTest(
-    # Or use the `CLST_TEST_BASE_URL` env var
+client = Clearstreet(
+    # Or use the `CLEARSTREET_BASE_URL` env var
     base_url="http://my.test.server.example.com:8083",
     http_client=DefaultHttpxClient(proxies="http://my.test.proxy.example.com", transport=httpx.HTTPTransport(local_address="0.0.0.0")),
 )

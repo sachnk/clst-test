@@ -9,7 +9,7 @@ import pytest
 import os
 from typing import TYPE_CHECKING, AsyncIterator
 
-from clst-test import ClstTest, AsyncClstTest
+from clst-test import Clearstreet, AsyncClearstreet
 
 if TYPE_CHECKING:
   from _pytest.fixtures import FixtureRequest
@@ -31,19 +31,19 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 bearer_token = "My Bearer Token"
 
 @pytest.fixture(scope="session")
-def client(request: FixtureRequest) -> Iterator[ClstTest]:
+def client(request: FixtureRequest) -> Iterator[Clearstreet]:
     strict = getattr(request, 'param', True)
     if not isinstance(strict, bool):
       raise TypeError(f'Unexpected fixture parameter type {type(strict)}, expected {bool}')
 
-    with ClstTest(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=strict) as client :
+    with Clearstreet(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=strict) as client :
         yield client
 
 @pytest.fixture(scope="session")
-async def async_client(request: FixtureRequest) -> AsyncIterator[AsyncClstTest]:
+async def async_client(request: FixtureRequest) -> AsyncIterator[AsyncClearstreet]:
     strict = getattr(request, 'param', True)
     if not isinstance(strict, bool):
       raise TypeError(f'Unexpected fixture parameter type {type(strict)}, expected {bool}')
 
-    async with AsyncClstTest(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=strict) as client :
+    async with AsyncClearstreet(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=strict) as client :
         yield client

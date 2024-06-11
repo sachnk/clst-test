@@ -4,19 +4,19 @@ from __future__ import annotations
 
 import httpx
 
-from .regt_margin import RegtMarginResource, AsyncRegtMarginResource
+from .regt_margin_simulations import RegtMarginSimulationsResource, AsyncRegtMarginSimulationsResource
 
 from ..._compat import cached_property
-
-from .portfolio_margin import PortfolioMarginResource, AsyncPortfolioMarginResource
-
-from .regt_margin_simulations import RegtMarginSimulationsResource, AsyncRegtMarginSimulationsResource
 
 from ...types.entity import Entity
 
 from ...types.entity_list_response import EntityListResponse
 
 from ...types.pnl_summary import PnlSummary
+
+from ...types.portfolio_margin import PortfolioMargin
+
+from ...types.regt_margin import RegtMargin
 
 from ..._response import (
     to_raw_response_wrapper,
@@ -40,22 +40,6 @@ from ..._base_client import (
     HttpxBinaryResponseContent,
 )
 from ...types import shared_params
-from .regt_margin import (
-    RegtMarginResource,
-    AsyncRegtMarginResource,
-    RegtMarginResourceWithRawResponse,
-    AsyncRegtMarginResourceWithRawResponse,
-    RegtMarginResourceWithStreamingResponse,
-    AsyncRegtMarginResourceWithStreamingResponse,
-)
-from .portfolio_margin import (
-    PortfolioMarginResource,
-    AsyncPortfolioMarginResource,
-    PortfolioMarginResourceWithRawResponse,
-    AsyncPortfolioMarginResourceWithRawResponse,
-    PortfolioMarginResourceWithStreamingResponse,
-    AsyncPortfolioMarginResourceWithStreamingResponse,
-)
 from .regt_margin_simulations import (
     RegtMarginSimulationsResource,
     AsyncRegtMarginSimulationsResource,
@@ -69,14 +53,6 @@ __all__ = ["EntitiesResource", "AsyncEntitiesResource"]
 
 
 class EntitiesResource(SyncAPIResource):
-    @cached_property
-    def regt_margin(self) -> RegtMarginResource:
-        return RegtMarginResource(self._client)
-
-    @cached_property
-    def portfolio_margin(self) -> PortfolioMarginResource:
-        return PortfolioMarginResource(self._client)
-
     @cached_property
     def regt_margin_simulations(self) -> RegtMarginSimulationsResource:
         return RegtMarginSimulationsResource(self._client)
@@ -143,7 +119,7 @@ class EntitiesResource(SyncAPIResource):
             cast_to=EntityListResponse,
         )
 
-    def pnl_summary(
+    def get_pnl_summary(
         self,
         entity_id: str,
         *,
@@ -178,16 +154,78 @@ class EntitiesResource(SyncAPIResource):
             cast_to=PnlSummary,
         )
 
+    def get_portfolio_margin(
+        self,
+        entity_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> PortfolioMargin:
+        """
+        Get latest portfolio margin calculation for the given entity
+
+        Args:
+          entity_id: Entity ID for the legal entity.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not entity_id:
+            raise ValueError(f"Expected a non-empty value for `entity_id` but received {entity_id!r}")
+        return self._get(
+            f"/entities/{entity_id}/portfolio-margin",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=PortfolioMargin,
+        )
+
+    def get_regt_margin(
+        self,
+        entity_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> RegtMargin:
+        """
+        Get the latest Reg-T margin calculation for the given entity
+
+        Args:
+          entity_id: Entity ID for the legal entity.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not entity_id:
+            raise ValueError(f"Expected a non-empty value for `entity_id` but received {entity_id!r}")
+        return self._get(
+            f"/entities/{entity_id}/regt-margin",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=RegtMargin,
+        )
+
 
 class AsyncEntitiesResource(AsyncAPIResource):
-    @cached_property
-    def regt_margin(self) -> AsyncRegtMarginResource:
-        return AsyncRegtMarginResource(self._client)
-
-    @cached_property
-    def portfolio_margin(self) -> AsyncPortfolioMarginResource:
-        return AsyncPortfolioMarginResource(self._client)
-
     @cached_property
     def regt_margin_simulations(self) -> AsyncRegtMarginSimulationsResource:
         return AsyncRegtMarginSimulationsResource(self._client)
@@ -254,7 +292,7 @@ class AsyncEntitiesResource(AsyncAPIResource):
             cast_to=EntityListResponse,
         )
 
-    async def pnl_summary(
+    async def get_pnl_summary(
         self,
         entity_id: str,
         *,
@@ -289,6 +327,76 @@ class AsyncEntitiesResource(AsyncAPIResource):
             cast_to=PnlSummary,
         )
 
+    async def get_portfolio_margin(
+        self,
+        entity_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> PortfolioMargin:
+        """
+        Get latest portfolio margin calculation for the given entity
+
+        Args:
+          entity_id: Entity ID for the legal entity.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not entity_id:
+            raise ValueError(f"Expected a non-empty value for `entity_id` but received {entity_id!r}")
+        return await self._get(
+            f"/entities/{entity_id}/portfolio-margin",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=PortfolioMargin,
+        )
+
+    async def get_regt_margin(
+        self,
+        entity_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> RegtMargin:
+        """
+        Get the latest Reg-T margin calculation for the given entity
+
+        Args:
+          entity_id: Entity ID for the legal entity.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not entity_id:
+            raise ValueError(f"Expected a non-empty value for `entity_id` but received {entity_id!r}")
+        return await self._get(
+            f"/entities/{entity_id}/regt-margin",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=RegtMargin,
+        )
+
 
 class EntitiesResourceWithRawResponse:
     def __init__(self, entities: EntitiesResource) -> None:
@@ -300,17 +408,15 @@ class EntitiesResourceWithRawResponse:
         self.list = to_raw_response_wrapper(
             entities.list,
         )
-        self.pnl_summary = to_raw_response_wrapper(
-            entities.pnl_summary,
+        self.get_pnl_summary = to_raw_response_wrapper(
+            entities.get_pnl_summary,
         )
-
-    @cached_property
-    def regt_margin(self) -> RegtMarginResourceWithRawResponse:
-        return RegtMarginResourceWithRawResponse(self._entities.regt_margin)
-
-    @cached_property
-    def portfolio_margin(self) -> PortfolioMarginResourceWithRawResponse:
-        return PortfolioMarginResourceWithRawResponse(self._entities.portfolio_margin)
+        self.get_portfolio_margin = to_raw_response_wrapper(
+            entities.get_portfolio_margin,
+        )
+        self.get_regt_margin = to_raw_response_wrapper(
+            entities.get_regt_margin,
+        )
 
     @cached_property
     def regt_margin_simulations(self) -> RegtMarginSimulationsResourceWithRawResponse:
@@ -327,17 +433,15 @@ class AsyncEntitiesResourceWithRawResponse:
         self.list = async_to_raw_response_wrapper(
             entities.list,
         )
-        self.pnl_summary = async_to_raw_response_wrapper(
-            entities.pnl_summary,
+        self.get_pnl_summary = async_to_raw_response_wrapper(
+            entities.get_pnl_summary,
         )
-
-    @cached_property
-    def regt_margin(self) -> AsyncRegtMarginResourceWithRawResponse:
-        return AsyncRegtMarginResourceWithRawResponse(self._entities.regt_margin)
-
-    @cached_property
-    def portfolio_margin(self) -> AsyncPortfolioMarginResourceWithRawResponse:
-        return AsyncPortfolioMarginResourceWithRawResponse(self._entities.portfolio_margin)
+        self.get_portfolio_margin = async_to_raw_response_wrapper(
+            entities.get_portfolio_margin,
+        )
+        self.get_regt_margin = async_to_raw_response_wrapper(
+            entities.get_regt_margin,
+        )
 
     @cached_property
     def regt_margin_simulations(self) -> AsyncRegtMarginSimulationsResourceWithRawResponse:
@@ -354,17 +458,15 @@ class EntitiesResourceWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             entities.list,
         )
-        self.pnl_summary = to_streamed_response_wrapper(
-            entities.pnl_summary,
+        self.get_pnl_summary = to_streamed_response_wrapper(
+            entities.get_pnl_summary,
         )
-
-    @cached_property
-    def regt_margin(self) -> RegtMarginResourceWithStreamingResponse:
-        return RegtMarginResourceWithStreamingResponse(self._entities.regt_margin)
-
-    @cached_property
-    def portfolio_margin(self) -> PortfolioMarginResourceWithStreamingResponse:
-        return PortfolioMarginResourceWithStreamingResponse(self._entities.portfolio_margin)
+        self.get_portfolio_margin = to_streamed_response_wrapper(
+            entities.get_portfolio_margin,
+        )
+        self.get_regt_margin = to_streamed_response_wrapper(
+            entities.get_regt_margin,
+        )
 
     @cached_property
     def regt_margin_simulations(self) -> RegtMarginSimulationsResourceWithStreamingResponse:
@@ -381,17 +483,15 @@ class AsyncEntitiesResourceWithStreamingResponse:
         self.list = async_to_streamed_response_wrapper(
             entities.list,
         )
-        self.pnl_summary = async_to_streamed_response_wrapper(
-            entities.pnl_summary,
+        self.get_pnl_summary = async_to_streamed_response_wrapper(
+            entities.get_pnl_summary,
         )
-
-    @cached_property
-    def regt_margin(self) -> AsyncRegtMarginResourceWithStreamingResponse:
-        return AsyncRegtMarginResourceWithStreamingResponse(self._entities.regt_margin)
-
-    @cached_property
-    def portfolio_margin(self) -> AsyncPortfolioMarginResourceWithStreamingResponse:
-        return AsyncPortfolioMarginResourceWithStreamingResponse(self._entities.portfolio_margin)
+        self.get_portfolio_margin = async_to_streamed_response_wrapper(
+            entities.get_portfolio_margin,
+        )
+        self.get_regt_margin = async_to_streamed_response_wrapper(
+            entities.get_regt_margin,
+        )
 
     @cached_property
     def regt_margin_simulations(self) -> AsyncRegtMarginSimulationsResourceWithStreamingResponse:
