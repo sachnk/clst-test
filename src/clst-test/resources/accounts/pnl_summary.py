@@ -6,7 +6,7 @@ import httpx
 
 from ..._compat import cached_property
 
-from ...types.pnl_summary import PnlSummary
+from ...types.pnl_summary import PNLSummary
 
 from ..._response import (
     to_raw_response_wrapper,
@@ -31,17 +31,17 @@ from ..._base_client import (
 )
 from ...types import shared_params
 
-__all__ = ["PnlSummaryResource", "AsyncPnlSummaryResource"]
+__all__ = ["PNLSummaryResource", "AsyncPNLSummaryResource"]
 
 
-class PnlSummaryResource(SyncAPIResource):
+class PNLSummaryResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> PnlSummaryResourceWithRawResponse:
-        return PnlSummaryResourceWithRawResponse(self)
+    def with_raw_response(self) -> PNLSummaryResourceWithRawResponse:
+        return PNLSummaryResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> PnlSummaryResourceWithStreamingResponse:
-        return PnlSummaryResourceWithStreamingResponse(self)
+    def with_streaming_response(self) -> PNLSummaryResourceWithStreamingResponse:
+        return PNLSummaryResourceWithStreamingResponse(self)
 
     def retrieve(
         self,
@@ -53,7 +53,7 @@ class PnlSummaryResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> PnlSummary:
+    ) -> PNLSummary:
         """
         Get PNL summary for a given account.
 
@@ -75,18 +75,18 @@ class PnlSummaryResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=PnlSummary,
+            cast_to=PNLSummary,
         )
 
 
-class AsyncPnlSummaryResource(AsyncAPIResource):
+class AsyncPNLSummaryResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncPnlSummaryResourceWithRawResponse:
-        return AsyncPnlSummaryResourceWithRawResponse(self)
+    def with_raw_response(self) -> AsyncPNLSummaryResourceWithRawResponse:
+        return AsyncPNLSummaryResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncPnlSummaryResourceWithStreamingResponse:
-        return AsyncPnlSummaryResourceWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncPNLSummaryResourceWithStreamingResponse:
+        return AsyncPNLSummaryResourceWithStreamingResponse(self)
 
     async def retrieve(
         self,
@@ -98,7 +98,7 @@ class AsyncPnlSummaryResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> PnlSummary:
+    ) -> PNLSummary:
         """
         Get PNL summary for a given account.
 
@@ -120,12 +120,12 @@ class AsyncPnlSummaryResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=PnlSummary,
+            cast_to=PNLSummary,
         )
 
 
-class PnlSummaryResourceWithRawResponse:
-    def __init__(self, pnl_summary: PnlSummaryResource) -> None:
+class PNLSummaryResourceWithRawResponse:
+    def __init__(self, pnl_summary: PNLSummaryResource) -> None:
         self._pnl_summary = pnl_summary
 
         self.retrieve = to_raw_response_wrapper(
@@ -133,8 +133,8 @@ class PnlSummaryResourceWithRawResponse:
         )
 
 
-class AsyncPnlSummaryResourceWithRawResponse:
-    def __init__(self, pnl_summary: AsyncPnlSummaryResource) -> None:
+class AsyncPNLSummaryResourceWithRawResponse:
+    def __init__(self, pnl_summary: AsyncPNLSummaryResource) -> None:
         self._pnl_summary = pnl_summary
 
         self.retrieve = async_to_raw_response_wrapper(
@@ -142,8 +142,8 @@ class AsyncPnlSummaryResourceWithRawResponse:
         )
 
 
-class PnlSummaryResourceWithStreamingResponse:
-    def __init__(self, pnl_summary: PnlSummaryResource) -> None:
+class PNLSummaryResourceWithStreamingResponse:
+    def __init__(self, pnl_summary: PNLSummaryResource) -> None:
         self._pnl_summary = pnl_summary
 
         self.retrieve = to_streamed_response_wrapper(
@@ -151,8 +151,8 @@ class PnlSummaryResourceWithStreamingResponse:
         )
 
 
-class AsyncPnlSummaryResourceWithStreamingResponse:
-    def __init__(self, pnl_summary: AsyncPnlSummaryResource) -> None:
+class AsyncPNLSummaryResourceWithStreamingResponse:
+    def __init__(self, pnl_summary: AsyncPNLSummaryResource) -> None:
         self._pnl_summary = pnl_summary
 
         self.retrieve = async_to_streamed_response_wrapper(

@@ -3,14 +3,14 @@
 Types:
 
 ```python
-from clst-test.types import Entity, PnlSummary, PortfolioMargin, RegtMargin, EntityListResponse
+from clst-test.types import Entity, PNLSummary, PortfolioMargin, RegtMargin, EntityListResponse
 ```
 
 Methods:
 
 - <code title="get /entities/{entity_id}">client.entities.<a href="./src/clst-test/resources/entities/entities.py">retrieve</a>(entity_id) -> <a href="./src/clst-test/types/entity.py">Entity</a></code>
 - <code title="get /entities">client.entities.<a href="./src/clst-test/resources/entities/entities.py">list</a>() -> <a href="./src/clst-test/types/entity_list_response.py">EntityListResponse</a></code>
-- <code title="get /entities/{entity_id}/pnl-summary">client.entities.<a href="./src/clst-test/resources/entities/entities.py">get_pnl_summary</a>(entity_id) -> <a href="./src/clst-test/types/pnl_summary.py">PnlSummary</a></code>
+- <code title="get /entities/{entity_id}/pnl-summary">client.entities.<a href="./src/clst-test/resources/entities/entities.py">get_pnl_summary</a>(entity_id) -> <a href="./src/clst-test/types/pnl_summary.py">PNLSummary</a></code>
 - <code title="get /entities/{entity_id}/portfolio-margin">client.entities.<a href="./src/clst-test/resources/entities/entities.py">get_portfolio_margin</a>(entity_id) -> <a href="./src/clst-test/types/portfolio_margin.py">PortfolioMargin</a></code>
 - <code title="get /entities/{entity_id}/regt-margin">client.entities.<a href="./src/clst-test/resources/entities/entities.py">get_regt_margin</a>(entity_id) -> <a href="./src/clst-test/types/regt_margin.py">RegtMargin</a></code>
 
@@ -32,7 +32,7 @@ Methods:
 Types:
 
 ```python
-from clst-test.types import Account, LocateOrder, Order, PnlSummaryForAccount, Position, Trade, AccountListResponse
+from clst-test.types import Account, LocateOrder, Order, PNLSummaryForAccount, Position, Trade, AccountListResponse
 ```
 
 Methods:
@@ -121,23 +121,23 @@ Methods:
 
 - <code title="get /accounts/{account_id}/easy-borrows">client.accounts.easy_borrows.<a href="./src/clst-test/resources/accounts/easy_borrows.py">list</a>(account_id) -> <a href="./src/clst-test/types/accounts/easy_borrow_list_response.py">EasyBorrowListResponse</a></code>
 
-## PnlSummary
+## PNLSummary
 
 Methods:
 
-- <code title="get /accounts/{account_id}/pnl-summary">client.accounts.pnl_summary.<a href="./src/clst-test/resources/accounts/pnl_summary.py">retrieve</a>(account_id) -> <a href="./src/clst-test/types/pnl_summary.py">PnlSummary</a></code>
+- <code title="get /accounts/{account_id}/pnl-summary">client.accounts.pnl_summary.<a href="./src/clst-test/resources/accounts/pnl_summary.py">retrieve</a>(account_id) -> <a href="./src/clst-test/types/pnl_summary.py">PNLSummary</a></code>
 
-## PnlDetails
+## PNLDetails
 
 Types:
 
 ```python
-from clst-test.types.accounts import PnlDetailListResponse
+from clst-test.types.accounts import PNLDetailListResponse
 ```
 
 Methods:
 
-- <code title="get /accounts/{account_id}/pnl-details">client.accounts.pnl_details.<a href="./src/clst-test/resources/accounts/pnl_details.py">list</a>(account_id) -> <a href="./src/clst-test/types/accounts/pnl_detail_list_response.py">PnlDetailListResponse</a></code>
+- <code title="get /accounts/{account_id}/pnl-details">client.accounts.pnl_details.<a href="./src/clst-test/resources/accounts/pnl_details.py">list</a>(account_id) -> <a href="./src/clst-test/types/accounts/pnl_detail_list_response.py">PNLDetailListResponse</a></code>
 
 # Instruments
 

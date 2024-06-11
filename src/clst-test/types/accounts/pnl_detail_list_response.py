@@ -11,7 +11,7 @@ from typing_extensions import Literal
 from pydantic import Field as FieldInfo
 from ...types import shared
 
-__all__ = ["PnlDetailListResponse", "Data"]
+__all__ = ["PNLDetailListResponse", "Data"]
 
 
 class Data(BaseModel):
@@ -87,5 +87,5 @@ class Data(BaseModel):
     """Profit and loss from market changes."""
 
 
-class PnlDetailListResponse(BaseModel):
+class PNLDetailListResponse(BaseModel):
     data: List[Data]

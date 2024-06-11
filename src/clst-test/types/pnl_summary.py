@@ -7,10 +7,10 @@ from typing_extensions import Literal
 from pydantic import Field as FieldInfo
 from ..types import shared
 
-__all__ = ["PnlSummary"]
+__all__ = ["PNLSummary"]
 
 
-class PnlSummary(BaseModel):
+class PNLSummary(BaseModel):
     day_pnl: float
     """Profit and loss from intraday trading activities."""
 

@@ -18,9 +18,9 @@ from .locate_orders import LocateOrdersResource, AsyncLocateOrdersResource
 
 from .easy_borrows import EasyBorrowsResource, AsyncEasyBorrowsResource
 
-from .pnl_summary import PnlSummaryResource, AsyncPnlSummaryResource
+from .pnl_summary import PNLSummaryResource, AsyncPNLSummaryResource
 
-from .pnl_details import PnlDetailsResource, AsyncPnlDetailsResource
+from .pnl_details import PNLDetailsResource, AsyncPNLDetailsResource
 
 from ...types.account import Account
 
@@ -97,20 +97,20 @@ from .easy_borrows import (
     AsyncEasyBorrowsResourceWithStreamingResponse,
 )
 from .pnl_summary import (
-    PnlSummaryResource,
-    AsyncPnlSummaryResource,
-    PnlSummaryResourceWithRawResponse,
-    AsyncPnlSummaryResourceWithRawResponse,
-    PnlSummaryResourceWithStreamingResponse,
-    AsyncPnlSummaryResourceWithStreamingResponse,
+    PNLSummaryResource,
+    AsyncPNLSummaryResource,
+    PNLSummaryResourceWithRawResponse,
+    AsyncPNLSummaryResourceWithRawResponse,
+    PNLSummaryResourceWithStreamingResponse,
+    AsyncPNLSummaryResourceWithStreamingResponse,
 )
 from .pnl_details import (
-    PnlDetailsResource,
-    AsyncPnlDetailsResource,
-    PnlDetailsResourceWithRawResponse,
-    AsyncPnlDetailsResourceWithRawResponse,
-    PnlDetailsResourceWithStreamingResponse,
-    AsyncPnlDetailsResourceWithStreamingResponse,
+    PNLDetailsResource,
+    AsyncPNLDetailsResource,
+    PNLDetailsResourceWithRawResponse,
+    AsyncPNLDetailsResourceWithRawResponse,
+    PNLDetailsResourceWithStreamingResponse,
+    AsyncPNLDetailsResourceWithStreamingResponse,
 )
 
 __all__ = ["AccountsResource", "AsyncAccountsResource"]
@@ -142,12 +142,12 @@ class AccountsResource(SyncAPIResource):
         return EasyBorrowsResource(self._client)
 
     @cached_property
-    def pnl_summary(self) -> PnlSummaryResource:
-        return PnlSummaryResource(self._client)
+    def pnl_summary(self) -> PNLSummaryResource:
+        return PNLSummaryResource(self._client)
 
     @cached_property
-    def pnl_details(self) -> PnlDetailsResource:
-        return PnlDetailsResource(self._client)
+    def pnl_details(self) -> PNLDetailsResource:
+        return PNLDetailsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AccountsResourceWithRawResponse:
@@ -238,12 +238,12 @@ class AsyncAccountsResource(AsyncAPIResource):
         return AsyncEasyBorrowsResource(self._client)
 
     @cached_property
-    def pnl_summary(self) -> AsyncPnlSummaryResource:
-        return AsyncPnlSummaryResource(self._client)
+    def pnl_summary(self) -> AsyncPNLSummaryResource:
+        return AsyncPNLSummaryResource(self._client)
 
     @cached_property
-    def pnl_details(self) -> AsyncPnlDetailsResource:
-        return AsyncPnlDetailsResource(self._client)
+    def pnl_details(self) -> AsyncPNLDetailsResource:
+        return AsyncPNLDetailsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncAccountsResourceWithRawResponse:
@@ -344,12 +344,12 @@ class AccountsResourceWithRawResponse:
         return EasyBorrowsResourceWithRawResponse(self._accounts.easy_borrows)
 
     @cached_property
-    def pnl_summary(self) -> PnlSummaryResourceWithRawResponse:
-        return PnlSummaryResourceWithRawResponse(self._accounts.pnl_summary)
+    def pnl_summary(self) -> PNLSummaryResourceWithRawResponse:
+        return PNLSummaryResourceWithRawResponse(self._accounts.pnl_summary)
 
     @cached_property
-    def pnl_details(self) -> PnlDetailsResourceWithRawResponse:
-        return PnlDetailsResourceWithRawResponse(self._accounts.pnl_details)
+    def pnl_details(self) -> PNLDetailsResourceWithRawResponse:
+        return PNLDetailsResourceWithRawResponse(self._accounts.pnl_details)
 
 
 class AsyncAccountsResourceWithRawResponse:
@@ -388,12 +388,12 @@ class AsyncAccountsResourceWithRawResponse:
         return AsyncEasyBorrowsResourceWithRawResponse(self._accounts.easy_borrows)
 
     @cached_property
-    def pnl_summary(self) -> AsyncPnlSummaryResourceWithRawResponse:
-        return AsyncPnlSummaryResourceWithRawResponse(self._accounts.pnl_summary)
+    def pnl_summary(self) -> AsyncPNLSummaryResourceWithRawResponse:
+        return AsyncPNLSummaryResourceWithRawResponse(self._accounts.pnl_summary)
 
     @cached_property
-    def pnl_details(self) -> AsyncPnlDetailsResourceWithRawResponse:
-        return AsyncPnlDetailsResourceWithRawResponse(self._accounts.pnl_details)
+    def pnl_details(self) -> AsyncPNLDetailsResourceWithRawResponse:
+        return AsyncPNLDetailsResourceWithRawResponse(self._accounts.pnl_details)
 
 
 class AccountsResourceWithStreamingResponse:
@@ -432,12 +432,12 @@ class AccountsResourceWithStreamingResponse:
         return EasyBorrowsResourceWithStreamingResponse(self._accounts.easy_borrows)
 
     @cached_property
-    def pnl_summary(self) -> PnlSummaryResourceWithStreamingResponse:
-        return PnlSummaryResourceWithStreamingResponse(self._accounts.pnl_summary)
+    def pnl_summary(self) -> PNLSummaryResourceWithStreamingResponse:
+        return PNLSummaryResourceWithStreamingResponse(self._accounts.pnl_summary)
 
     @cached_property
-    def pnl_details(self) -> PnlDetailsResourceWithStreamingResponse:
-        return PnlDetailsResourceWithStreamingResponse(self._accounts.pnl_details)
+    def pnl_details(self) -> PNLDetailsResourceWithStreamingResponse:
+        return PNLDetailsResourceWithStreamingResponse(self._accounts.pnl_details)
 
 
 class AsyncAccountsResourceWithStreamingResponse:
@@ -476,9 +476,9 @@ class AsyncAccountsResourceWithStreamingResponse:
         return AsyncEasyBorrowsResourceWithStreamingResponse(self._accounts.easy_borrows)
 
     @cached_property
-    def pnl_summary(self) -> AsyncPnlSummaryResourceWithStreamingResponse:
-        return AsyncPnlSummaryResourceWithStreamingResponse(self._accounts.pnl_summary)
+    def pnl_summary(self) -> AsyncPNLSummaryResourceWithStreamingResponse:
+        return AsyncPNLSummaryResourceWithStreamingResponse(self._accounts.pnl_summary)
 
     @cached_property
-    def pnl_details(self) -> AsyncPnlDetailsResourceWithStreamingResponse:
-        return AsyncPnlDetailsResourceWithStreamingResponse(self._accounts.pnl_details)
+    def pnl_details(self) -> AsyncPNLDetailsResourceWithStreamingResponse:
+        return AsyncPNLDetailsResourceWithStreamingResponse(self._accounts.pnl_details)

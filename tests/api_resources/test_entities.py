@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from clst-test import Clearstreet, AsyncClearstreet
 
-from clst-test.types import Entity, EntityListResponse, PnlSummary, PortfolioMargin, RegtMargin
+from clst-test.types import Entity, EntityListResponse, PNLSummary, PortfolioMargin, RegtMargin
 
 from typing import Any, cast
 
@@ -93,7 +93,7 @@ class TestEntities:
         entity = client.entities.get_pnl_summary(
             "x",
         )
-        assert_matches_type(PnlSummary, entity, path=['response'])
+        assert_matches_type(PNLSummary, entity, path=['response'])
 
     @parametrize
     def test_raw_response_get_pnl_summary(self, client: Clearstreet) -> None:
@@ -105,7 +105,7 @@ class TestEntities:
         assert response.is_closed is True
         assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         entity = response.parse()
-        assert_matches_type(PnlSummary, entity, path=['response'])
+        assert_matches_type(PNLSummary, entity, path=['response'])
 
     @parametrize
     def test_streaming_response_get_pnl_summary(self, client: Clearstreet) -> None:
@@ -116,7 +116,7 @@ class TestEntities:
             assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             entity = response.parse()
-            assert_matches_type(PnlSummary, entity, path=['response'])
+            assert_matches_type(PNLSummary, entity, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -278,7 +278,7 @@ class TestAsyncEntities:
         entity = await async_client.entities.get_pnl_summary(
             "x",
         )
-        assert_matches_type(PnlSummary, entity, path=['response'])
+        assert_matches_type(PNLSummary, entity, path=['response'])
 
     @parametrize
     async def test_raw_response_get_pnl_summary(self, async_client: AsyncClearstreet) -> None:
@@ -290,7 +290,7 @@ class TestAsyncEntities:
         assert response.is_closed is True
         assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         entity = await response.parse()
-        assert_matches_type(PnlSummary, entity, path=['response'])
+        assert_matches_type(PNLSummary, entity, path=['response'])
 
     @parametrize
     async def test_streaming_response_get_pnl_summary(self, async_client: AsyncClearstreet) -> None:
@@ -301,7 +301,7 @@ class TestAsyncEntities:
             assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             entity = await response.parse()
-            assert_matches_type(PnlSummary, entity, path=['response'])
+            assert_matches_type(PNLSummary, entity, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
