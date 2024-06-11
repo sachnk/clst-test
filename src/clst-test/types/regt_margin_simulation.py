@@ -1,15 +1,13 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from ..._models import BaseModel
+from .._models import BaseModel
 
-from ..regt_margin import RegTMargin
-
-from .simulation_id import SimulationID
+from .regt_margin import RegTMargin
 
 from typing import Optional, Union, List, Dict, Any
 from typing_extensions import Literal
 from pydantic import Field as FieldInfo
-from ...types import shared
+from ..types import shared
 
 __all__ = ["RegTMarginSimulation"]
 
@@ -27,5 +25,5 @@ class RegTMarginSimulation(BaseModel):
     name: str
     """Name of this simulation that you provided when creating it."""
 
-    simulation_id: SimulationID
+    simulation_id: str
     """Unique ID for a simulation."""

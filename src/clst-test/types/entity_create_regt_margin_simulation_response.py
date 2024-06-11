@@ -1,17 +1,15 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from ..._models import BaseModel
-
-from .simulation_id import SimulationID
+from .._models import BaseModel
 
 from typing import Optional, Union, List, Dict, Any
 from typing_extensions import Literal
 from pydantic import Field as FieldInfo
-from ...types import shared
+from ..types import shared
 
-__all__ = ["RegTMarginSimulationCreateResponse"]
+__all__ = ["EntityCreateRegTMarginSimulationResponse"]
 
 
-class RegTMarginSimulationCreateResponse(BaseModel):
-    simulation_id: SimulationID
+class EntityCreateRegTMarginSimulationResponse(BaseModel):
+    simulation_id: str
     """Unique ID for a simulation."""

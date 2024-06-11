@@ -8,14 +8,14 @@ from typing import Iterable
 
 from typing import List, Union, Dict, Optional
 from typing_extensions import Literal, TypedDict, Required, Annotated
-from ..._types import FileTypes
-from ..._utils import PropertyInfo
-from ...types import shared_params
+from .._types import FileTypes
+from .._utils import PropertyInfo
+from ..types import shared_params
 
-__all__ = ["RegTMarginSimulationCreateParams", "Price", "Trade"]
+__all__ = ["EntityCreateRegTMarginSimulationParams", "Price", "Trade"]
 
 
-class RegTMarginSimulationCreateParams(TypedDict, total=False):
+class EntityCreateRegTMarginSimulationParams(TypedDict, total=False):
     name: Required[str]
     """A name for this simulation for reference."""
 

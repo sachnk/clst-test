@@ -3,29 +3,18 @@
 Types:
 
 ```python
-from clst-test.types import Entity, PNLSummary, PortfolioMargin, RegTMargin, EntityListResponse
+from clst-test.types import Entity, PNLSummary, PortfolioMargin, RegTMargin, RegTMarginSimulation, EntityListResponse, EntityCreateRegTMarginSimulationResponse
 ```
 
 Methods:
 
-- <code title="get /entities/{entity_id}">client.entities.<a href="./src/clst-test/resources/entities/entities.py">retrieve</a>(entity_id) -> <a href="./src/clst-test/types/entity.py">Entity</a></code>
-- <code title="get /entities">client.entities.<a href="./src/clst-test/resources/entities/entities.py">list</a>() -> <a href="./src/clst-test/types/entity_list_response.py">EntityListResponse</a></code>
-- <code title="get /entities/{entity_id}/pnl-summary">client.entities.<a href="./src/clst-test/resources/entities/entities.py">get_pnl_summary</a>(entity_id) -> <a href="./src/clst-test/types/pnl_summary.py">PNLSummary</a></code>
-- <code title="get /entities/{entity_id}/portfolio-margin">client.entities.<a href="./src/clst-test/resources/entities/entities.py">get_portfolio_margin</a>(entity_id) -> <a href="./src/clst-test/types/portfolio_margin.py">PortfolioMargin</a></code>
-- <code title="get /entities/{entity_id}/regt-margin">client.entities.<a href="./src/clst-test/resources/entities/entities.py">get_regt_margin</a>(entity_id) -> <a href="./src/clst-test/types/regt_margin.py">RegTMargin</a></code>
-
-## RegTMarginSimulations
-
-Types:
-
-```python
-from clst-test.types.entities import RegTMarginSimulation, SimulationID, RegTMarginSimulationCreateResponse
-```
-
-Methods:
-
-- <code title="post /entities/{entity_id}/regt-margin-simulations">client.entities.regt_margin_simulations.<a href="./src/clst-test/resources/entities/regt_margin_simulations.py">create</a>(entity_id, \*\*<a href="src/clst-test/types/entities/regt_margin_simulation_create_params.py">params</a>) -> <a href="./src/clst-test/types/entities/regt_margin_simulation_create_response.py">RegTMarginSimulationCreateResponse</a></code>
-- <code title="get /entities/{entity_id}/regt-margin-simulations/{simulation_id}">client.entities.regt_margin_simulations.<a href="./src/clst-test/resources/entities/regt_margin_simulations.py">retrieve</a>(simulation_id, \*, entity_id) -> <a href="./src/clst-test/types/entities/regt_margin_simulation.py">RegTMarginSimulation</a></code>
+- <code title="get /entities/{entity_id}">client.entities.<a href="./src/clst-test/resources/entities.py">retrieve</a>(entity_id) -> <a href="./src/clst-test/types/entity.py">Entity</a></code>
+- <code title="get /entities">client.entities.<a href="./src/clst-test/resources/entities.py">list</a>() -> <a href="./src/clst-test/types/entity_list_response.py">EntityListResponse</a></code>
+- <code title="post /entities/{entity_id}/regt-margin-simulations">client.entities.<a href="./src/clst-test/resources/entities.py">create_regt_margin_simulation</a>(entity_id, \*\*<a href="src/clst-test/types/entity_create_regt_margin_simulation_params.py">params</a>) -> <a href="./src/clst-test/types/entity_create_regt_margin_simulation_response.py">EntityCreateRegTMarginSimulationResponse</a></code>
+- <code title="get /entities/{entity_id}/pnl-summary">client.entities.<a href="./src/clst-test/resources/entities.py">get_pnl_summary</a>(entity_id) -> <a href="./src/clst-test/types/pnl_summary.py">PNLSummary</a></code>
+- <code title="get /entities/{entity_id}/portfolio-margin">client.entities.<a href="./src/clst-test/resources/entities.py">get_portfolio_margin</a>(entity_id) -> <a href="./src/clst-test/types/portfolio_margin.py">PortfolioMargin</a></code>
+- <code title="get /entities/{entity_id}/regt-margin">client.entities.<a href="./src/clst-test/resources/entities.py">get_regt_margin</a>(entity_id) -> <a href="./src/clst-test/types/regt_margin.py">RegTMargin</a></code>
+- <code title="get /entities/{entity_id}/regt-margin-simulations/{simulation_id}">client.entities.<a href="./src/clst-test/resources/entities.py">get_regt_margin_simulation</a>(simulation_id, \*, entity_id) -> <a href="./src/clst-test/types/regt_margin_simulation.py">RegTMarginSimulation</a></code>
 
 # Accounts
 
