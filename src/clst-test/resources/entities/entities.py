@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from .regt_margin_simulations import RegtMarginSimulationsResource, AsyncRegtMarginSimulationsResource
+from .regt_margin_simulations import RegTMarginSimulationsResource, AsyncRegTMarginSimulationsResource
 
 from ..._compat import cached_property
 
@@ -16,7 +16,7 @@ from ...types.pnl_summary import PNLSummary
 
 from ...types.portfolio_margin import PortfolioMargin
 
-from ...types.regt_margin import RegtMargin
+from ...types.regt_margin import RegTMargin
 
 from ..._response import (
     to_raw_response_wrapper,
@@ -41,12 +41,12 @@ from ..._base_client import (
 )
 from ...types import shared_params
 from .regt_margin_simulations import (
-    RegtMarginSimulationsResource,
-    AsyncRegtMarginSimulationsResource,
-    RegtMarginSimulationsResourceWithRawResponse,
-    AsyncRegtMarginSimulationsResourceWithRawResponse,
-    RegtMarginSimulationsResourceWithStreamingResponse,
-    AsyncRegtMarginSimulationsResourceWithStreamingResponse,
+    RegTMarginSimulationsResource,
+    AsyncRegTMarginSimulationsResource,
+    RegTMarginSimulationsResourceWithRawResponse,
+    AsyncRegTMarginSimulationsResourceWithRawResponse,
+    RegTMarginSimulationsResourceWithStreamingResponse,
+    AsyncRegTMarginSimulationsResourceWithStreamingResponse,
 )
 
 __all__ = ["EntitiesResource", "AsyncEntitiesResource"]
@@ -54,8 +54,8 @@ __all__ = ["EntitiesResource", "AsyncEntitiesResource"]
 
 class EntitiesResource(SyncAPIResource):
     @cached_property
-    def regt_margin_simulations(self) -> RegtMarginSimulationsResource:
-        return RegtMarginSimulationsResource(self._client)
+    def regt_margin_simulations(self) -> RegTMarginSimulationsResource:
+        return RegTMarginSimulationsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> EntitiesResourceWithRawResponse:
@@ -199,7 +199,7 @@ class EntitiesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> RegtMargin:
+    ) -> RegTMargin:
         """
         Get the latest Reg-T margin calculation for the given entity
 
@@ -221,14 +221,14 @@ class EntitiesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=RegtMargin,
+            cast_to=RegTMargin,
         )
 
 
 class AsyncEntitiesResource(AsyncAPIResource):
     @cached_property
-    def regt_margin_simulations(self) -> AsyncRegtMarginSimulationsResource:
-        return AsyncRegtMarginSimulationsResource(self._client)
+    def regt_margin_simulations(self) -> AsyncRegTMarginSimulationsResource:
+        return AsyncRegTMarginSimulationsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncEntitiesResourceWithRawResponse:
@@ -372,7 +372,7 @@ class AsyncEntitiesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> RegtMargin:
+    ) -> RegTMargin:
         """
         Get the latest Reg-T margin calculation for the given entity
 
@@ -394,7 +394,7 @@ class AsyncEntitiesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=RegtMargin,
+            cast_to=RegTMargin,
         )
 
 
@@ -419,8 +419,8 @@ class EntitiesResourceWithRawResponse:
         )
 
     @cached_property
-    def regt_margin_simulations(self) -> RegtMarginSimulationsResourceWithRawResponse:
-        return RegtMarginSimulationsResourceWithRawResponse(self._entities.regt_margin_simulations)
+    def regt_margin_simulations(self) -> RegTMarginSimulationsResourceWithRawResponse:
+        return RegTMarginSimulationsResourceWithRawResponse(self._entities.regt_margin_simulations)
 
 
 class AsyncEntitiesResourceWithRawResponse:
@@ -444,8 +444,8 @@ class AsyncEntitiesResourceWithRawResponse:
         )
 
     @cached_property
-    def regt_margin_simulations(self) -> AsyncRegtMarginSimulationsResourceWithRawResponse:
-        return AsyncRegtMarginSimulationsResourceWithRawResponse(self._entities.regt_margin_simulations)
+    def regt_margin_simulations(self) -> AsyncRegTMarginSimulationsResourceWithRawResponse:
+        return AsyncRegTMarginSimulationsResourceWithRawResponse(self._entities.regt_margin_simulations)
 
 
 class EntitiesResourceWithStreamingResponse:
@@ -469,8 +469,8 @@ class EntitiesResourceWithStreamingResponse:
         )
 
     @cached_property
-    def regt_margin_simulations(self) -> RegtMarginSimulationsResourceWithStreamingResponse:
-        return RegtMarginSimulationsResourceWithStreamingResponse(self._entities.regt_margin_simulations)
+    def regt_margin_simulations(self) -> RegTMarginSimulationsResourceWithStreamingResponse:
+        return RegTMarginSimulationsResourceWithStreamingResponse(self._entities.regt_margin_simulations)
 
 
 class AsyncEntitiesResourceWithStreamingResponse:
@@ -494,5 +494,5 @@ class AsyncEntitiesResourceWithStreamingResponse:
         )
 
     @cached_property
-    def regt_margin_simulations(self) -> AsyncRegtMarginSimulationsResourceWithStreamingResponse:
-        return AsyncRegtMarginSimulationsResourceWithStreamingResponse(self._entities.regt_margin_simulations)
+    def regt_margin_simulations(self) -> AsyncRegTMarginSimulationsResourceWithStreamingResponse:
+        return AsyncRegTMarginSimulationsResourceWithStreamingResponse(self._entities.regt_margin_simulations)

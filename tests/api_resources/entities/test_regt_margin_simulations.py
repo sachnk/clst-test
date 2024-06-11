@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from clst-test import Clearstreet, AsyncClearstreet
 
-from clst-test.types.entities import RegtMarginSimulationCreateResponse, RegtMarginSimulation
+from clst-test.types.entities import RegTMarginSimulationCreateResponse, RegTMarginSimulation
 
 from typing import Any, cast
 
@@ -21,7 +21,7 @@ from clst-test.types.entities import SimulationID
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
-class TestRegtMarginSimulations:
+class TestRegTMarginSimulations:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=['loose', 'strict'])
 
 
@@ -31,7 +31,7 @@ class TestRegtMarginSimulations:
             "x",
             name="string",
         )
-        assert_matches_type(RegtMarginSimulationCreateResponse, regt_margin_simulation, path=['response'])
+        assert_matches_type(RegTMarginSimulationCreateResponse, regt_margin_simulation, path=['response'])
 
     @parametrize
     def test_method_create_with_all_params(self, client: Clearstreet) -> None:
@@ -72,7 +72,7 @@ class TestRegtMarginSimulations:
                 "price": "x",
             }],
         )
-        assert_matches_type(RegtMarginSimulationCreateResponse, regt_margin_simulation, path=['response'])
+        assert_matches_type(RegTMarginSimulationCreateResponse, regt_margin_simulation, path=['response'])
 
     @parametrize
     def test_raw_response_create(self, client: Clearstreet) -> None:
@@ -85,7 +85,7 @@ class TestRegtMarginSimulations:
         assert response.is_closed is True
         assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         regt_margin_simulation = response.parse()
-        assert_matches_type(RegtMarginSimulationCreateResponse, regt_margin_simulation, path=['response'])
+        assert_matches_type(RegTMarginSimulationCreateResponse, regt_margin_simulation, path=['response'])
 
     @parametrize
     def test_streaming_response_create(self, client: Clearstreet) -> None:
@@ -97,7 +97,7 @@ class TestRegtMarginSimulations:
             assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             regt_margin_simulation = response.parse()
-            assert_matches_type(RegtMarginSimulationCreateResponse, regt_margin_simulation, path=['response'])
+            assert_matches_type(RegTMarginSimulationCreateResponse, regt_margin_simulation, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -115,7 +115,7 @@ class TestRegtMarginSimulations:
             "6460030d-8ed4-19d3-818e-e87b36e90005",
             entity_id="x",
         )
-        assert_matches_type(RegtMarginSimulation, regt_margin_simulation, path=['response'])
+        assert_matches_type(RegTMarginSimulation, regt_margin_simulation, path=['response'])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Clearstreet) -> None:
@@ -128,7 +128,7 @@ class TestRegtMarginSimulations:
         assert response.is_closed is True
         assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         regt_margin_simulation = response.parse()
-        assert_matches_type(RegtMarginSimulation, regt_margin_simulation, path=['response'])
+        assert_matches_type(RegTMarginSimulation, regt_margin_simulation, path=['response'])
 
     @parametrize
     def test_streaming_response_retrieve(self, client: Clearstreet) -> None:
@@ -140,7 +140,7 @@ class TestRegtMarginSimulations:
             assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             regt_margin_simulation = response.parse()
-            assert_matches_type(RegtMarginSimulation, regt_margin_simulation, path=['response'])
+            assert_matches_type(RegTMarginSimulation, regt_margin_simulation, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -157,7 +157,7 @@ class TestRegtMarginSimulations:
               "",
               entity_id="x",
           )
-class TestAsyncRegtMarginSimulations:
+class TestAsyncRegTMarginSimulations:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=['loose', 'strict'])
 
 
@@ -167,7 +167,7 @@ class TestAsyncRegtMarginSimulations:
             "x",
             name="string",
         )
-        assert_matches_type(RegtMarginSimulationCreateResponse, regt_margin_simulation, path=['response'])
+        assert_matches_type(RegTMarginSimulationCreateResponse, regt_margin_simulation, path=['response'])
 
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncClearstreet) -> None:
@@ -208,7 +208,7 @@ class TestAsyncRegtMarginSimulations:
                 "price": "x",
             }],
         )
-        assert_matches_type(RegtMarginSimulationCreateResponse, regt_margin_simulation, path=['response'])
+        assert_matches_type(RegTMarginSimulationCreateResponse, regt_margin_simulation, path=['response'])
 
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncClearstreet) -> None:
@@ -221,7 +221,7 @@ class TestAsyncRegtMarginSimulations:
         assert response.is_closed is True
         assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         regt_margin_simulation = await response.parse()
-        assert_matches_type(RegtMarginSimulationCreateResponse, regt_margin_simulation, path=['response'])
+        assert_matches_type(RegTMarginSimulationCreateResponse, regt_margin_simulation, path=['response'])
 
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncClearstreet) -> None:
@@ -233,7 +233,7 @@ class TestAsyncRegtMarginSimulations:
             assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             regt_margin_simulation = await response.parse()
-            assert_matches_type(RegtMarginSimulationCreateResponse, regt_margin_simulation, path=['response'])
+            assert_matches_type(RegTMarginSimulationCreateResponse, regt_margin_simulation, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -251,7 +251,7 @@ class TestAsyncRegtMarginSimulations:
             "6460030d-8ed4-19d3-818e-e87b36e90005",
             entity_id="x",
         )
-        assert_matches_type(RegtMarginSimulation, regt_margin_simulation, path=['response'])
+        assert_matches_type(RegTMarginSimulation, regt_margin_simulation, path=['response'])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncClearstreet) -> None:
@@ -264,7 +264,7 @@ class TestAsyncRegtMarginSimulations:
         assert response.is_closed is True
         assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         regt_margin_simulation = await response.parse()
-        assert_matches_type(RegtMarginSimulation, regt_margin_simulation, path=['response'])
+        assert_matches_type(RegTMarginSimulation, regt_margin_simulation, path=['response'])
 
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncClearstreet) -> None:
@@ -276,7 +276,7 @@ class TestAsyncRegtMarginSimulations:
             assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             regt_margin_simulation = await response.parse()
-            assert_matches_type(RegtMarginSimulation, regt_margin_simulation, path=['response'])
+            assert_matches_type(RegTMarginSimulation, regt_margin_simulation, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 

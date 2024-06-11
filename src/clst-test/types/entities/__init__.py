@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from .regt_margin_simulation import RegtMarginSimulation as RegtMarginSimulation
+from .regt_margin_simulation import RegTMarginSimulation as RegTMarginSimulation
 from .simulation_id import SimulationID as SimulationID
 from .regt_margin_simulation_create_response import (
-    RegtMarginSimulationCreateResponse as RegtMarginSimulationCreateResponse,
+    RegTMarginSimulationCreateResponse as RegTMarginSimulationCreateResponse,
 )
-from .regt_margin_simulation_create_params import RegtMarginSimulationCreateParams as RegtMarginSimulationCreateParams
+from .regt_margin_simulation_create_params import RegTMarginSimulationCreateParams as RegTMarginSimulationCreateParams

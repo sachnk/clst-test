@@ -12,10 +12,10 @@ from ..._types import FileTypes
 from ..._utils import PropertyInfo
 from ...types import shared_params
 
-__all__ = ["RegtMarginSimulationCreateParams", "Price", "Trade"]
+__all__ = ["RegTMarginSimulationCreateParams", "Price", "Trade"]
 
 
-class RegtMarginSimulationCreateParams(TypedDict, total=False):
+class RegTMarginSimulationCreateParams(TypedDict, total=False):
     name: Required[str]
     """A name for this simulation for reference."""
 

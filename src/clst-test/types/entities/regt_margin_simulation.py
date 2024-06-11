@@ -2,7 +2,7 @@
 
 from ..._models import BaseModel
 
-from ..regt_margin import RegtMargin
+from ..regt_margin import RegTMargin
 
 from .simulation_id import SimulationID
 
@@ -11,14 +11,14 @@ from typing_extensions import Literal
 from pydantic import Field as FieldInfo
 from ...types import shared
 
-__all__ = ["RegtMarginSimulation"]
+__all__ = ["RegTMarginSimulation"]
 
 
-class RegtMarginSimulation(BaseModel):
-    after: RegtMargin
+class RegTMarginSimulation(BaseModel):
+    after: RegTMargin
     """The margin calculation after applying simulated trades."""
 
-    before: RegtMargin
+    before: RegTMargin
     """The margin calculation before applying simulated trades."""
 
     created_at: int
