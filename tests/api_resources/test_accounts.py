@@ -12,10 +12,10 @@ from clst_minus_test import Clearstreet, AsyncClearstreet
 from clst_minus_test.types import (
     Account,
     AccountListResponse,
+    PNLSummaryForAccount,
     AccountCreateOrdersInBulkResponse,
     AccountRetrievePNLDetailsResponse,
 )
-from clst_minus_test.types.shared import PNLSummary
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -207,7 +207,7 @@ class TestAccounts:
         account = client.accounts.retrieve_pnl_summary(
             "x",
         )
-        assert_matches_type(PNLSummary, account, path=["response"])
+        assert_matches_type(PNLSummaryForAccount, account, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve_pnl_summary(self, client: Clearstreet) -> None:
@@ -218,7 +218,7 @@ class TestAccounts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account = response.parse()
-        assert_matches_type(PNLSummary, account, path=["response"])
+        assert_matches_type(PNLSummaryForAccount, account, path=["response"])
 
     @parametrize
     def test_streaming_response_retrieve_pnl_summary(self, client: Clearstreet) -> None:
@@ -229,7 +229,7 @@ class TestAccounts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             account = response.parse()
-            assert_matches_type(PNLSummary, account, path=["response"])
+            assert_matches_type(PNLSummaryForAccount, account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -428,7 +428,7 @@ class TestAsyncAccounts:
         account = await async_client.accounts.retrieve_pnl_summary(
             "x",
         )
-        assert_matches_type(PNLSummary, account, path=["response"])
+        assert_matches_type(PNLSummaryForAccount, account, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve_pnl_summary(self, async_client: AsyncClearstreet) -> None:
@@ -439,7 +439,7 @@ class TestAsyncAccounts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account = await response.parse()
-        assert_matches_type(PNLSummary, account, path=["response"])
+        assert_matches_type(PNLSummaryForAccount, account, path=["response"])
 
     @parametrize
     async def test_streaming_response_retrieve_pnl_summary(self, async_client: AsyncClearstreet) -> None:
@@ -450,7 +450,7 @@ class TestAsyncAccounts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             account = await response.parse()
-            assert_matches_type(PNLSummary, account, path=["response"])
+            assert_matches_type(PNLSummaryForAccount, account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
