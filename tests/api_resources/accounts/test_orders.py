@@ -2,29 +2,25 @@
 
 from __future__ import annotations
 
-from clst-test import Clearstreet, AsyncClearstreet
-
-from clst-test.types.accounts import OrderCreateResponse, OrderRetrieveResponse, OrderListResponse, OrderDeleteResponse
-
+import os
 from typing import Any, cast
 
-import os
 import pytest
-import httpx
-from typing_extensions import get_args
-from typing import Optional
-from respx import MockRouter
-from clst-test import Clearstreet, AsyncClearstreet
+
 from tests.utils import assert_matches_type
-from clst-test.types.accounts import order_create_params
-from clst-test.types.accounts import order_list_params
-from clst-test.types.accounts import order_delete_params
+from clst_minus_test import Clearstreet, AsyncClearstreet
+from clst_minus_test.types.accounts import (
+    OrderListResponse,
+    OrderCreateResponse,
+    OrderDeleteResponse,
+    OrderRetrieveResponse,
+)
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
-class TestOrders:
-    parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=['loose', 'strict'])
 
+class TestOrders:
+    parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
     def test_method_create(self, client: Clearstreet) -> None:
@@ -37,7 +33,7 @@ class TestOrders:
             symbol="AAPL",
             time_in_force="day",
         )
-        assert_matches_type(OrderCreateResponse, order, path=['response'])
+        assert_matches_type(OrderCreateResponse, order, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params(self, client: Clearstreet) -> None:
@@ -54,11 +50,10 @@ class TestOrders:
             reference_id="my-order-id-123",
             symbol_format="cms",
         )
-        assert_matches_type(OrderCreateResponse, order, path=['response'])
+        assert_matches_type(OrderCreateResponse, order, path=["response"])
 
     @parametrize
     def test_raw_response_create(self, client: Clearstreet) -> None:
-
         response = client.accounts.orders.with_raw_response.create(
             "x",
             order_type="limit",
@@ -70,9 +65,9 @@ class TestOrders:
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         order = response.parse()
-        assert_matches_type(OrderCreateResponse, order, path=['response'])
+        assert_matches_type(OrderCreateResponse, order, path=["response"])
 
     @parametrize
     def test_streaming_response_create(self, client: Clearstreet) -> None:
@@ -84,27 +79,27 @@ class TestOrders:
             strategy_type="sor",
             symbol="AAPL",
             time_in_force="day",
-        ) as response :
+        ) as response:
             assert not response.is_closed
-            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             order = response.parse()
-            assert_matches_type(OrderCreateResponse, order, path=['response'])
+            assert_matches_type(OrderCreateResponse, order, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_path_params_create(self, client: Clearstreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
-          client.accounts.orders.with_raw_response.create(
-              "",
-              order_type="limit",
-              quantity="x",
-              side="buy",
-              strategy_type="sor",
-              symbol="AAPL",
-              time_in_force="day",
-          )
+            client.accounts.orders.with_raw_response.create(
+                "",
+                order_type="limit",
+                quantity="x",
+                side="buy",
+                strategy_type="sor",
+                symbol="AAPL",
+                time_in_force="day",
+            )
 
     @parametrize
     def test_method_retrieve(self, client: Clearstreet) -> None:
@@ -112,55 +107,54 @@ class TestOrders:
             "x",
             account_id="x",
         )
-        assert_matches_type(OrderRetrieveResponse, order, path=['response'])
+        assert_matches_type(OrderRetrieveResponse, order, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Clearstreet) -> None:
-
         response = client.accounts.orders.with_raw_response.retrieve(
             "x",
             account_id="x",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         order = response.parse()
-        assert_matches_type(OrderRetrieveResponse, order, path=['response'])
+        assert_matches_type(OrderRetrieveResponse, order, path=["response"])
 
     @parametrize
     def test_streaming_response_retrieve(self, client: Clearstreet) -> None:
         with client.accounts.orders.with_streaming_response.retrieve(
             "x",
             account_id="x",
-        ) as response :
+        ) as response:
             assert not response.is_closed
-            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             order = response.parse()
-            assert_matches_type(OrderRetrieveResponse, order, path=['response'])
+            assert_matches_type(OrderRetrieveResponse, order, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_path_params_retrieve(self, client: Clearstreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
-          client.accounts.orders.with_raw_response.retrieve(
-              "x",
-              account_id="",
-          )
+            client.accounts.orders.with_raw_response.retrieve(
+                "x",
+                account_id="",
+            )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `order_id` but received ''"):
-          client.accounts.orders.with_raw_response.retrieve(
-              "",
-              account_id="x",
-          )
+            client.accounts.orders.with_raw_response.retrieve(
+                "",
+                account_id="x",
+            )
 
     @parametrize
     def test_method_list(self, client: Clearstreet) -> None:
         order = client.accounts.orders.list(
             "x",
         )
-        assert_matches_type(OrderListResponse, order, path=['response'])
+        assert_matches_type(OrderListResponse, order, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Clearstreet) -> None:
@@ -171,46 +165,45 @@ class TestOrders:
             page_token="string",
             to=1710613560668,
         )
-        assert_matches_type(OrderListResponse, order, path=['response'])
+        assert_matches_type(OrderListResponse, order, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Clearstreet) -> None:
-
         response = client.accounts.orders.with_raw_response.list(
             "x",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         order = response.parse()
-        assert_matches_type(OrderListResponse, order, path=['response'])
+        assert_matches_type(OrderListResponse, order, path=["response"])
 
     @parametrize
     def test_streaming_response_list(self, client: Clearstreet) -> None:
         with client.accounts.orders.with_streaming_response.list(
             "x",
-        ) as response :
+        ) as response:
             assert not response.is_closed
-            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             order = response.parse()
-            assert_matches_type(OrderListResponse, order, path=['response'])
+            assert_matches_type(OrderListResponse, order, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_path_params_list(self, client: Clearstreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
-          client.accounts.orders.with_raw_response.list(
-              "",
-          )
+            client.accounts.orders.with_raw_response.list(
+                "",
+            )
 
     @parametrize
     def test_method_delete(self, client: Clearstreet) -> None:
         order = client.accounts.orders.delete(
             "x",
         )
-        assert_matches_type(OrderDeleteResponse, order, path=['response'])
+        assert_matches_type(OrderDeleteResponse, order, path=["response"])
 
     @parametrize
     def test_method_delete_with_all_params(self, client: Clearstreet) -> None:
@@ -219,39 +212,38 @@ class TestOrders:
             symbol="AAPL",
             symbol_format="cms",
         )
-        assert_matches_type(OrderDeleteResponse, order, path=['response'])
+        assert_matches_type(OrderDeleteResponse, order, path=["response"])
 
     @parametrize
     def test_raw_response_delete(self, client: Clearstreet) -> None:
-
         response = client.accounts.orders.with_raw_response.delete(
             "x",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         order = response.parse()
-        assert_matches_type(OrderDeleteResponse, order, path=['response'])
+        assert_matches_type(OrderDeleteResponse, order, path=["response"])
 
     @parametrize
     def test_streaming_response_delete(self, client: Clearstreet) -> None:
         with client.accounts.orders.with_streaming_response.delete(
             "x",
-        ) as response :
+        ) as response:
             assert not response.is_closed
-            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             order = response.parse()
-            assert_matches_type(OrderDeleteResponse, order, path=['response'])
+            assert_matches_type(OrderDeleteResponse, order, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_path_params_delete(self, client: Clearstreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
-          client.accounts.orders.with_raw_response.delete(
-              "",
-          )
+            client.accounts.orders.with_raw_response.delete(
+                "",
+            )
 
     @parametrize
     def test_method_cancel(self, client: Clearstreet) -> None:
@@ -263,14 +255,13 @@ class TestOrders:
 
     @parametrize
     def test_raw_response_cancel(self, client: Clearstreet) -> None:
-
         response = client.accounts.orders.with_raw_response.cancel(
             "x",
             account_id="x",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         order = response.parse()
         assert order is None
 
@@ -279,9 +270,9 @@ class TestOrders:
         with client.accounts.orders.with_streaming_response.cancel(
             "x",
             account_id="x",
-        ) as response :
+        ) as response:
             assert not response.is_closed
-            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             order = response.parse()
             assert order is None
@@ -291,19 +282,20 @@ class TestOrders:
     @parametrize
     def test_path_params_cancel(self, client: Clearstreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
-          client.accounts.orders.with_raw_response.cancel(
-              "x",
-              account_id="",
-          )
+            client.accounts.orders.with_raw_response.cancel(
+                "x",
+                account_id="",
+            )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `order_id` but received ''"):
-          client.accounts.orders.with_raw_response.cancel(
-              "",
-              account_id="x",
-          )
-class TestAsyncOrders:
-    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=['loose', 'strict'])
+            client.accounts.orders.with_raw_response.cancel(
+                "",
+                account_id="x",
+            )
 
+
+class TestAsyncOrders:
+    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
     async def test_method_create(self, async_client: AsyncClearstreet) -> None:
@@ -316,7 +308,7 @@ class TestAsyncOrders:
             symbol="AAPL",
             time_in_force="day",
         )
-        assert_matches_type(OrderCreateResponse, order, path=['response'])
+        assert_matches_type(OrderCreateResponse, order, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncClearstreet) -> None:
@@ -333,11 +325,10 @@ class TestAsyncOrders:
             reference_id="my-order-id-123",
             symbol_format="cms",
         )
-        assert_matches_type(OrderCreateResponse, order, path=['response'])
+        assert_matches_type(OrderCreateResponse, order, path=["response"])
 
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncClearstreet) -> None:
-
         response = await async_client.accounts.orders.with_raw_response.create(
             "x",
             order_type="limit",
@@ -349,9 +340,9 @@ class TestAsyncOrders:
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         order = await response.parse()
-        assert_matches_type(OrderCreateResponse, order, path=['response'])
+        assert_matches_type(OrderCreateResponse, order, path=["response"])
 
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncClearstreet) -> None:
@@ -363,27 +354,27 @@ class TestAsyncOrders:
             strategy_type="sor",
             symbol="AAPL",
             time_in_force="day",
-        ) as response :
+        ) as response:
             assert not response.is_closed
-            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             order = await response.parse()
-            assert_matches_type(OrderCreateResponse, order, path=['response'])
+            assert_matches_type(OrderCreateResponse, order, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_path_params_create(self, async_client: AsyncClearstreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
-          await async_client.accounts.orders.with_raw_response.create(
-              "",
-              order_type="limit",
-              quantity="x",
-              side="buy",
-              strategy_type="sor",
-              symbol="AAPL",
-              time_in_force="day",
-          )
+            await async_client.accounts.orders.with_raw_response.create(
+                "",
+                order_type="limit",
+                quantity="x",
+                side="buy",
+                strategy_type="sor",
+                symbol="AAPL",
+                time_in_force="day",
+            )
 
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncClearstreet) -> None:
@@ -391,55 +382,54 @@ class TestAsyncOrders:
             "x",
             account_id="x",
         )
-        assert_matches_type(OrderRetrieveResponse, order, path=['response'])
+        assert_matches_type(OrderRetrieveResponse, order, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncClearstreet) -> None:
-
         response = await async_client.accounts.orders.with_raw_response.retrieve(
             "x",
             account_id="x",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         order = await response.parse()
-        assert_matches_type(OrderRetrieveResponse, order, path=['response'])
+        assert_matches_type(OrderRetrieveResponse, order, path=["response"])
 
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncClearstreet) -> None:
         async with async_client.accounts.orders.with_streaming_response.retrieve(
             "x",
             account_id="x",
-        ) as response :
+        ) as response:
             assert not response.is_closed
-            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             order = await response.parse()
-            assert_matches_type(OrderRetrieveResponse, order, path=['response'])
+            assert_matches_type(OrderRetrieveResponse, order, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncClearstreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
-          await async_client.accounts.orders.with_raw_response.retrieve(
-              "x",
-              account_id="",
-          )
+            await async_client.accounts.orders.with_raw_response.retrieve(
+                "x",
+                account_id="",
+            )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `order_id` but received ''"):
-          await async_client.accounts.orders.with_raw_response.retrieve(
-              "",
-              account_id="x",
-          )
+            await async_client.accounts.orders.with_raw_response.retrieve(
+                "",
+                account_id="x",
+            )
 
     @parametrize
     async def test_method_list(self, async_client: AsyncClearstreet) -> None:
         order = await async_client.accounts.orders.list(
             "x",
         )
-        assert_matches_type(OrderListResponse, order, path=['response'])
+        assert_matches_type(OrderListResponse, order, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncClearstreet) -> None:
@@ -450,46 +440,45 @@ class TestAsyncOrders:
             page_token="string",
             to=1710613560668,
         )
-        assert_matches_type(OrderListResponse, order, path=['response'])
+        assert_matches_type(OrderListResponse, order, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncClearstreet) -> None:
-
         response = await async_client.accounts.orders.with_raw_response.list(
             "x",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         order = await response.parse()
-        assert_matches_type(OrderListResponse, order, path=['response'])
+        assert_matches_type(OrderListResponse, order, path=["response"])
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncClearstreet) -> None:
         async with async_client.accounts.orders.with_streaming_response.list(
             "x",
-        ) as response :
+        ) as response:
             assert not response.is_closed
-            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             order = await response.parse()
-            assert_matches_type(OrderListResponse, order, path=['response'])
+            assert_matches_type(OrderListResponse, order, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_path_params_list(self, async_client: AsyncClearstreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
-          await async_client.accounts.orders.with_raw_response.list(
-              "",
-          )
+            await async_client.accounts.orders.with_raw_response.list(
+                "",
+            )
 
     @parametrize
     async def test_method_delete(self, async_client: AsyncClearstreet) -> None:
         order = await async_client.accounts.orders.delete(
             "x",
         )
-        assert_matches_type(OrderDeleteResponse, order, path=['response'])
+        assert_matches_type(OrderDeleteResponse, order, path=["response"])
 
     @parametrize
     async def test_method_delete_with_all_params(self, async_client: AsyncClearstreet) -> None:
@@ -498,39 +487,38 @@ class TestAsyncOrders:
             symbol="AAPL",
             symbol_format="cms",
         )
-        assert_matches_type(OrderDeleteResponse, order, path=['response'])
+        assert_matches_type(OrderDeleteResponse, order, path=["response"])
 
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncClearstreet) -> None:
-
         response = await async_client.accounts.orders.with_raw_response.delete(
             "x",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         order = await response.parse()
-        assert_matches_type(OrderDeleteResponse, order, path=['response'])
+        assert_matches_type(OrderDeleteResponse, order, path=["response"])
 
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncClearstreet) -> None:
         async with async_client.accounts.orders.with_streaming_response.delete(
             "x",
-        ) as response :
+        ) as response:
             assert not response.is_closed
-            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             order = await response.parse()
-            assert_matches_type(OrderDeleteResponse, order, path=['response'])
+            assert_matches_type(OrderDeleteResponse, order, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncClearstreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
-          await async_client.accounts.orders.with_raw_response.delete(
-              "",
-          )
+            await async_client.accounts.orders.with_raw_response.delete(
+                "",
+            )
 
     @parametrize
     async def test_method_cancel(self, async_client: AsyncClearstreet) -> None:
@@ -542,14 +530,13 @@ class TestAsyncOrders:
 
     @parametrize
     async def test_raw_response_cancel(self, async_client: AsyncClearstreet) -> None:
-
         response = await async_client.accounts.orders.with_raw_response.cancel(
             "x",
             account_id="x",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         order = await response.parse()
         assert order is None
 
@@ -558,9 +545,9 @@ class TestAsyncOrders:
         async with async_client.accounts.orders.with_streaming_response.cancel(
             "x",
             account_id="x",
-        ) as response :
+        ) as response:
             assert not response.is_closed
-            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             order = await response.parse()
             assert order is None
@@ -570,13 +557,13 @@ class TestAsyncOrders:
     @parametrize
     async def test_path_params_cancel(self, async_client: AsyncClearstreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
-          await async_client.accounts.orders.with_raw_response.cancel(
-              "x",
-              account_id="",
-          )
+            await async_client.accounts.orders.with_raw_response.cancel(
+                "x",
+                account_id="",
+            )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `order_id` but received ''"):
-          await async_client.accounts.orders.with_raw_response.cancel(
-              "",
-              account_id="x",
-          )
+            await async_client.accounts.orders.with_raw_response.cancel(
+                "",
+                account_id="x",
+            )

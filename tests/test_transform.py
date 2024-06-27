@@ -8,15 +8,15 @@ from typing_extensions import Required, Annotated, TypedDict
 
 import pytest
 
-from clst-test._types import Base64FileInput
-from clst-test._utils import (
+from clst_minus_test._types import Base64FileInput
+from clst_minus_test._utils import (
     PropertyInfo,
     transform as _transform,
     parse_datetime,
     async_transform as _async_transform,
 )
-from clst-test._compat import PYDANTIC_V2
-from clst-test._models import BaseModel
+from clst_minus_test._compat import PYDANTIC_V2
+from clst_minus_test._models import BaseModel
 
 _T = TypeVar("_T")
 

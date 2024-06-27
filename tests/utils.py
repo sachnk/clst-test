@@ -8,8 +8,8 @@ from typing import Any, TypeVar, Iterator, cast
 from datetime import date, datetime
 from typing_extensions import Literal, get_args, get_origin, assert_type
 
-from clst-test._types import NoneType
-from clst-test._utils import (
+from clst_minus_test._types import NoneType
+from clst_minus_test._utils import (
     is_dict,
     is_list,
     is_list_type,
@@ -17,8 +17,8 @@ from clst-test._utils import (
     extract_type_arg,
     is_annotated_type,
 )
-from clst-test._compat import PYDANTIC_V2, field_outer_type, get_model_fields
-from clst-test._models import BaseModel
+from clst_minus_test._compat import PYDANTIC_V2, field_outer_type, get_model_fields
+from clst_minus_test._models import BaseModel
 
 BaseModelT = TypeVar("BaseModelT", bound=BaseModel)
 
