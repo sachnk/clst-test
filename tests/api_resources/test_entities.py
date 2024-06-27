@@ -11,13 +11,13 @@ from tests.utils import assert_matches_type
 from clst_minus_test import Clearstreet, AsyncClearstreet
 from clst_minus_test.types import (
     Entity,
-    PNLSummary,
     RegTMargin,
     PortfolioMargin,
     EntityListResponse,
     RegTMarginSimulation,
     EntityCreateRegTMarginSimulationResponse,
 )
+from clst_minus_test.types.shared import PNLSummary
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -180,15 +180,15 @@ class TestEntities:
             )
 
     @parametrize
-    def test_method_get_pnl_summary(self, client: Clearstreet) -> None:
-        entity = client.entities.get_pnl_summary(
+    def test_method_retrieve_pnl_summary(self, client: Clearstreet) -> None:
+        entity = client.entities.retrieve_pnl_summary(
             "x",
         )
         assert_matches_type(PNLSummary, entity, path=["response"])
 
     @parametrize
-    def test_raw_response_get_pnl_summary(self, client: Clearstreet) -> None:
-        response = client.entities.with_raw_response.get_pnl_summary(
+    def test_raw_response_retrieve_pnl_summary(self, client: Clearstreet) -> None:
+        response = client.entities.with_raw_response.retrieve_pnl_summary(
             "x",
         )
 
@@ -198,8 +198,8 @@ class TestEntities:
         assert_matches_type(PNLSummary, entity, path=["response"])
 
     @parametrize
-    def test_streaming_response_get_pnl_summary(self, client: Clearstreet) -> None:
-        with client.entities.with_streaming_response.get_pnl_summary(
+    def test_streaming_response_retrieve_pnl_summary(self, client: Clearstreet) -> None:
+        with client.entities.with_streaming_response.retrieve_pnl_summary(
             "x",
         ) as response:
             assert not response.is_closed
@@ -211,22 +211,22 @@ class TestEntities:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_get_pnl_summary(self, client: Clearstreet) -> None:
+    def test_path_params_retrieve_pnl_summary(self, client: Clearstreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entity_id` but received ''"):
-            client.entities.with_raw_response.get_pnl_summary(
+            client.entities.with_raw_response.retrieve_pnl_summary(
                 "",
             )
 
     @parametrize
-    def test_method_get_portfolio_margin(self, client: Clearstreet) -> None:
-        entity = client.entities.get_portfolio_margin(
+    def test_method_retrieve_portfolio_margin(self, client: Clearstreet) -> None:
+        entity = client.entities.retrieve_portfolio_margin(
             "x",
         )
         assert_matches_type(PortfolioMargin, entity, path=["response"])
 
     @parametrize
-    def test_raw_response_get_portfolio_margin(self, client: Clearstreet) -> None:
-        response = client.entities.with_raw_response.get_portfolio_margin(
+    def test_raw_response_retrieve_portfolio_margin(self, client: Clearstreet) -> None:
+        response = client.entities.with_raw_response.retrieve_portfolio_margin(
             "x",
         )
 
@@ -236,8 +236,8 @@ class TestEntities:
         assert_matches_type(PortfolioMargin, entity, path=["response"])
 
     @parametrize
-    def test_streaming_response_get_portfolio_margin(self, client: Clearstreet) -> None:
-        with client.entities.with_streaming_response.get_portfolio_margin(
+    def test_streaming_response_retrieve_portfolio_margin(self, client: Clearstreet) -> None:
+        with client.entities.with_streaming_response.retrieve_portfolio_margin(
             "x",
         ) as response:
             assert not response.is_closed
@@ -249,22 +249,22 @@ class TestEntities:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_get_portfolio_margin(self, client: Clearstreet) -> None:
+    def test_path_params_retrieve_portfolio_margin(self, client: Clearstreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entity_id` but received ''"):
-            client.entities.with_raw_response.get_portfolio_margin(
+            client.entities.with_raw_response.retrieve_portfolio_margin(
                 "",
             )
 
     @parametrize
-    def test_method_get_regt_margin(self, client: Clearstreet) -> None:
-        entity = client.entities.get_regt_margin(
+    def test_method_retrieve_regt_margin(self, client: Clearstreet) -> None:
+        entity = client.entities.retrieve_regt_margin(
             "x",
         )
         assert_matches_type(RegTMargin, entity, path=["response"])
 
     @parametrize
-    def test_raw_response_get_regt_margin(self, client: Clearstreet) -> None:
-        response = client.entities.with_raw_response.get_regt_margin(
+    def test_raw_response_retrieve_regt_margin(self, client: Clearstreet) -> None:
+        response = client.entities.with_raw_response.retrieve_regt_margin(
             "x",
         )
 
@@ -274,8 +274,8 @@ class TestEntities:
         assert_matches_type(RegTMargin, entity, path=["response"])
 
     @parametrize
-    def test_streaming_response_get_regt_margin(self, client: Clearstreet) -> None:
-        with client.entities.with_streaming_response.get_regt_margin(
+    def test_streaming_response_retrieve_regt_margin(self, client: Clearstreet) -> None:
+        with client.entities.with_streaming_response.retrieve_regt_margin(
             "x",
         ) as response:
             assert not response.is_closed
@@ -287,23 +287,23 @@ class TestEntities:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_get_regt_margin(self, client: Clearstreet) -> None:
+    def test_path_params_retrieve_regt_margin(self, client: Clearstreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entity_id` but received ''"):
-            client.entities.with_raw_response.get_regt_margin(
+            client.entities.with_raw_response.retrieve_regt_margin(
                 "",
             )
 
     @parametrize
-    def test_method_get_regt_margin_simulation(self, client: Clearstreet) -> None:
-        entity = client.entities.get_regt_margin_simulation(
+    def test_method_retrieve_regt_margin_simulation(self, client: Clearstreet) -> None:
+        entity = client.entities.retrieve_regt_margin_simulation(
             "6460030d-8ed4-19d3-818e-e87b36e90005",
             entity_id="x",
         )
         assert_matches_type(RegTMarginSimulation, entity, path=["response"])
 
     @parametrize
-    def test_raw_response_get_regt_margin_simulation(self, client: Clearstreet) -> None:
-        response = client.entities.with_raw_response.get_regt_margin_simulation(
+    def test_raw_response_retrieve_regt_margin_simulation(self, client: Clearstreet) -> None:
+        response = client.entities.with_raw_response.retrieve_regt_margin_simulation(
             "6460030d-8ed4-19d3-818e-e87b36e90005",
             entity_id="x",
         )
@@ -314,8 +314,8 @@ class TestEntities:
         assert_matches_type(RegTMarginSimulation, entity, path=["response"])
 
     @parametrize
-    def test_streaming_response_get_regt_margin_simulation(self, client: Clearstreet) -> None:
-        with client.entities.with_streaming_response.get_regt_margin_simulation(
+    def test_streaming_response_retrieve_regt_margin_simulation(self, client: Clearstreet) -> None:
+        with client.entities.with_streaming_response.retrieve_regt_margin_simulation(
             "6460030d-8ed4-19d3-818e-e87b36e90005",
             entity_id="x",
         ) as response:
@@ -328,15 +328,15 @@ class TestEntities:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_get_regt_margin_simulation(self, client: Clearstreet) -> None:
+    def test_path_params_retrieve_regt_margin_simulation(self, client: Clearstreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entity_id` but received ''"):
-            client.entities.with_raw_response.get_regt_margin_simulation(
+            client.entities.with_raw_response.retrieve_regt_margin_simulation(
                 "6460030d-8ed4-19d3-818e-e87b36e90005",
                 entity_id="",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `simulation_id` but received ''"):
-            client.entities.with_raw_response.get_regt_margin_simulation(
+            client.entities.with_raw_response.retrieve_regt_margin_simulation(
                 "",
                 entity_id="x",
             )
@@ -500,15 +500,15 @@ class TestAsyncEntities:
             )
 
     @parametrize
-    async def test_method_get_pnl_summary(self, async_client: AsyncClearstreet) -> None:
-        entity = await async_client.entities.get_pnl_summary(
+    async def test_method_retrieve_pnl_summary(self, async_client: AsyncClearstreet) -> None:
+        entity = await async_client.entities.retrieve_pnl_summary(
             "x",
         )
         assert_matches_type(PNLSummary, entity, path=["response"])
 
     @parametrize
-    async def test_raw_response_get_pnl_summary(self, async_client: AsyncClearstreet) -> None:
-        response = await async_client.entities.with_raw_response.get_pnl_summary(
+    async def test_raw_response_retrieve_pnl_summary(self, async_client: AsyncClearstreet) -> None:
+        response = await async_client.entities.with_raw_response.retrieve_pnl_summary(
             "x",
         )
 
@@ -518,8 +518,8 @@ class TestAsyncEntities:
         assert_matches_type(PNLSummary, entity, path=["response"])
 
     @parametrize
-    async def test_streaming_response_get_pnl_summary(self, async_client: AsyncClearstreet) -> None:
-        async with async_client.entities.with_streaming_response.get_pnl_summary(
+    async def test_streaming_response_retrieve_pnl_summary(self, async_client: AsyncClearstreet) -> None:
+        async with async_client.entities.with_streaming_response.retrieve_pnl_summary(
             "x",
         ) as response:
             assert not response.is_closed
@@ -531,22 +531,22 @@ class TestAsyncEntities:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_get_pnl_summary(self, async_client: AsyncClearstreet) -> None:
+    async def test_path_params_retrieve_pnl_summary(self, async_client: AsyncClearstreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entity_id` but received ''"):
-            await async_client.entities.with_raw_response.get_pnl_summary(
+            await async_client.entities.with_raw_response.retrieve_pnl_summary(
                 "",
             )
 
     @parametrize
-    async def test_method_get_portfolio_margin(self, async_client: AsyncClearstreet) -> None:
-        entity = await async_client.entities.get_portfolio_margin(
+    async def test_method_retrieve_portfolio_margin(self, async_client: AsyncClearstreet) -> None:
+        entity = await async_client.entities.retrieve_portfolio_margin(
             "x",
         )
         assert_matches_type(PortfolioMargin, entity, path=["response"])
 
     @parametrize
-    async def test_raw_response_get_portfolio_margin(self, async_client: AsyncClearstreet) -> None:
-        response = await async_client.entities.with_raw_response.get_portfolio_margin(
+    async def test_raw_response_retrieve_portfolio_margin(self, async_client: AsyncClearstreet) -> None:
+        response = await async_client.entities.with_raw_response.retrieve_portfolio_margin(
             "x",
         )
 
@@ -556,8 +556,8 @@ class TestAsyncEntities:
         assert_matches_type(PortfolioMargin, entity, path=["response"])
 
     @parametrize
-    async def test_streaming_response_get_portfolio_margin(self, async_client: AsyncClearstreet) -> None:
-        async with async_client.entities.with_streaming_response.get_portfolio_margin(
+    async def test_streaming_response_retrieve_portfolio_margin(self, async_client: AsyncClearstreet) -> None:
+        async with async_client.entities.with_streaming_response.retrieve_portfolio_margin(
             "x",
         ) as response:
             assert not response.is_closed
@@ -569,22 +569,22 @@ class TestAsyncEntities:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_get_portfolio_margin(self, async_client: AsyncClearstreet) -> None:
+    async def test_path_params_retrieve_portfolio_margin(self, async_client: AsyncClearstreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entity_id` but received ''"):
-            await async_client.entities.with_raw_response.get_portfolio_margin(
+            await async_client.entities.with_raw_response.retrieve_portfolio_margin(
                 "",
             )
 
     @parametrize
-    async def test_method_get_regt_margin(self, async_client: AsyncClearstreet) -> None:
-        entity = await async_client.entities.get_regt_margin(
+    async def test_method_retrieve_regt_margin(self, async_client: AsyncClearstreet) -> None:
+        entity = await async_client.entities.retrieve_regt_margin(
             "x",
         )
         assert_matches_type(RegTMargin, entity, path=["response"])
 
     @parametrize
-    async def test_raw_response_get_regt_margin(self, async_client: AsyncClearstreet) -> None:
-        response = await async_client.entities.with_raw_response.get_regt_margin(
+    async def test_raw_response_retrieve_regt_margin(self, async_client: AsyncClearstreet) -> None:
+        response = await async_client.entities.with_raw_response.retrieve_regt_margin(
             "x",
         )
 
@@ -594,8 +594,8 @@ class TestAsyncEntities:
         assert_matches_type(RegTMargin, entity, path=["response"])
 
     @parametrize
-    async def test_streaming_response_get_regt_margin(self, async_client: AsyncClearstreet) -> None:
-        async with async_client.entities.with_streaming_response.get_regt_margin(
+    async def test_streaming_response_retrieve_regt_margin(self, async_client: AsyncClearstreet) -> None:
+        async with async_client.entities.with_streaming_response.retrieve_regt_margin(
             "x",
         ) as response:
             assert not response.is_closed
@@ -607,23 +607,23 @@ class TestAsyncEntities:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_get_regt_margin(self, async_client: AsyncClearstreet) -> None:
+    async def test_path_params_retrieve_regt_margin(self, async_client: AsyncClearstreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entity_id` but received ''"):
-            await async_client.entities.with_raw_response.get_regt_margin(
+            await async_client.entities.with_raw_response.retrieve_regt_margin(
                 "",
             )
 
     @parametrize
-    async def test_method_get_regt_margin_simulation(self, async_client: AsyncClearstreet) -> None:
-        entity = await async_client.entities.get_regt_margin_simulation(
+    async def test_method_retrieve_regt_margin_simulation(self, async_client: AsyncClearstreet) -> None:
+        entity = await async_client.entities.retrieve_regt_margin_simulation(
             "6460030d-8ed4-19d3-818e-e87b36e90005",
             entity_id="x",
         )
         assert_matches_type(RegTMarginSimulation, entity, path=["response"])
 
     @parametrize
-    async def test_raw_response_get_regt_margin_simulation(self, async_client: AsyncClearstreet) -> None:
-        response = await async_client.entities.with_raw_response.get_regt_margin_simulation(
+    async def test_raw_response_retrieve_regt_margin_simulation(self, async_client: AsyncClearstreet) -> None:
+        response = await async_client.entities.with_raw_response.retrieve_regt_margin_simulation(
             "6460030d-8ed4-19d3-818e-e87b36e90005",
             entity_id="x",
         )
@@ -634,8 +634,8 @@ class TestAsyncEntities:
         assert_matches_type(RegTMarginSimulation, entity, path=["response"])
 
     @parametrize
-    async def test_streaming_response_get_regt_margin_simulation(self, async_client: AsyncClearstreet) -> None:
-        async with async_client.entities.with_streaming_response.get_regt_margin_simulation(
+    async def test_streaming_response_retrieve_regt_margin_simulation(self, async_client: AsyncClearstreet) -> None:
+        async with async_client.entities.with_streaming_response.retrieve_regt_margin_simulation(
             "6460030d-8ed4-19d3-818e-e87b36e90005",
             entity_id="x",
         ) as response:
@@ -648,15 +648,15 @@ class TestAsyncEntities:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_get_regt_margin_simulation(self, async_client: AsyncClearstreet) -> None:
+    async def test_path_params_retrieve_regt_margin_simulation(self, async_client: AsyncClearstreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `entity_id` but received ''"):
-            await async_client.entities.with_raw_response.get_regt_margin_simulation(
+            await async_client.entities.with_raw_response.retrieve_regt_margin_simulation(
                 "6460030d-8ed4-19d3-818e-e87b36e90005",
                 entity_id="",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `simulation_id` but received ''"):
-            await async_client.entities.with_raw_response.get_regt_margin_simulation(
+            await async_client.entities.with_raw_response.retrieve_regt_margin_simulation(
                 "",
                 entity_id="x",
             )

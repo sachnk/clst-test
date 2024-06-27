@@ -3,9 +3,9 @@
 from typing import List
 from typing_extensions import Literal
 
-from ..._models import BaseModel
+from .._models import BaseModel
 
-__all__ = ["PNLDetailListResponse", "Data"]
+__all__ = ["AccountRetrievePNLDetailsResponse", "Data"]
 
 
 class Data(BaseModel):
@@ -81,5 +81,5 @@ class Data(BaseModel):
     """Profit and loss from market changes."""
 
 
-class PNLDetailListResponse(BaseModel):
+class AccountRetrievePNLDetailsResponse(BaseModel):
     data: List[Data]

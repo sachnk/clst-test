@@ -24,9 +24,9 @@ from .._base_client import (
     make_request_options,
 )
 from ..types.entity import Entity
-from ..types.pnl_summary import PNLSummary
 from ..types.regt_margin import RegTMargin
 from ..types.portfolio_margin import PortfolioMargin
+from ..types.shared.pnl_summary import PNLSummary
 from ..types.entity_list_response import EntityListResponse
 from ..types.regt_margin_simulation import RegTMarginSimulation
 from ..types.entity_create_regt_margin_simulation_response import EntityCreateRegTMarginSimulationResponse
@@ -163,7 +163,7 @@ class EntitiesResource(SyncAPIResource):
             cast_to=EntityCreateRegTMarginSimulationResponse,
         )
 
-    def get_pnl_summary(
+    def retrieve_pnl_summary(
         self,
         entity_id: str,
         *,
@@ -198,7 +198,7 @@ class EntitiesResource(SyncAPIResource):
             cast_to=PNLSummary,
         )
 
-    def get_portfolio_margin(
+    def retrieve_portfolio_margin(
         self,
         entity_id: str,
         *,
@@ -233,7 +233,7 @@ class EntitiesResource(SyncAPIResource):
             cast_to=PortfolioMargin,
         )
 
-    def get_regt_margin(
+    def retrieve_regt_margin(
         self,
         entity_id: str,
         *,
@@ -268,7 +268,7 @@ class EntitiesResource(SyncAPIResource):
             cast_to=RegTMargin,
         )
 
-    def get_regt_margin_simulation(
+    def retrieve_regt_margin_simulation(
         self,
         simulation_id: str,
         *,
@@ -440,7 +440,7 @@ class AsyncEntitiesResource(AsyncAPIResource):
             cast_to=EntityCreateRegTMarginSimulationResponse,
         )
 
-    async def get_pnl_summary(
+    async def retrieve_pnl_summary(
         self,
         entity_id: str,
         *,
@@ -475,7 +475,7 @@ class AsyncEntitiesResource(AsyncAPIResource):
             cast_to=PNLSummary,
         )
 
-    async def get_portfolio_margin(
+    async def retrieve_portfolio_margin(
         self,
         entity_id: str,
         *,
@@ -510,7 +510,7 @@ class AsyncEntitiesResource(AsyncAPIResource):
             cast_to=PortfolioMargin,
         )
 
-    async def get_regt_margin(
+    async def retrieve_regt_margin(
         self,
         entity_id: str,
         *,
@@ -545,7 +545,7 @@ class AsyncEntitiesResource(AsyncAPIResource):
             cast_to=RegTMargin,
         )
 
-    async def get_regt_margin_simulation(
+    async def retrieve_regt_margin_simulation(
         self,
         simulation_id: str,
         *,
@@ -601,17 +601,17 @@ class EntitiesResourceWithRawResponse:
         self.create_regt_margin_simulation = to_raw_response_wrapper(
             entities.create_regt_margin_simulation,
         )
-        self.get_pnl_summary = to_raw_response_wrapper(
-            entities.get_pnl_summary,
+        self.retrieve_pnl_summary = to_raw_response_wrapper(
+            entities.retrieve_pnl_summary,
         )
-        self.get_portfolio_margin = to_raw_response_wrapper(
-            entities.get_portfolio_margin,
+        self.retrieve_portfolio_margin = to_raw_response_wrapper(
+            entities.retrieve_portfolio_margin,
         )
-        self.get_regt_margin = to_raw_response_wrapper(
-            entities.get_regt_margin,
+        self.retrieve_regt_margin = to_raw_response_wrapper(
+            entities.retrieve_regt_margin,
         )
-        self.get_regt_margin_simulation = to_raw_response_wrapper(
-            entities.get_regt_margin_simulation,
+        self.retrieve_regt_margin_simulation = to_raw_response_wrapper(
+            entities.retrieve_regt_margin_simulation,
         )
 
 
@@ -628,17 +628,17 @@ class AsyncEntitiesResourceWithRawResponse:
         self.create_regt_margin_simulation = async_to_raw_response_wrapper(
             entities.create_regt_margin_simulation,
         )
-        self.get_pnl_summary = async_to_raw_response_wrapper(
-            entities.get_pnl_summary,
+        self.retrieve_pnl_summary = async_to_raw_response_wrapper(
+            entities.retrieve_pnl_summary,
         )
-        self.get_portfolio_margin = async_to_raw_response_wrapper(
-            entities.get_portfolio_margin,
+        self.retrieve_portfolio_margin = async_to_raw_response_wrapper(
+            entities.retrieve_portfolio_margin,
         )
-        self.get_regt_margin = async_to_raw_response_wrapper(
-            entities.get_regt_margin,
+        self.retrieve_regt_margin = async_to_raw_response_wrapper(
+            entities.retrieve_regt_margin,
         )
-        self.get_regt_margin_simulation = async_to_raw_response_wrapper(
-            entities.get_regt_margin_simulation,
+        self.retrieve_regt_margin_simulation = async_to_raw_response_wrapper(
+            entities.retrieve_regt_margin_simulation,
         )
 
 
@@ -655,17 +655,17 @@ class EntitiesResourceWithStreamingResponse:
         self.create_regt_margin_simulation = to_streamed_response_wrapper(
             entities.create_regt_margin_simulation,
         )
-        self.get_pnl_summary = to_streamed_response_wrapper(
-            entities.get_pnl_summary,
+        self.retrieve_pnl_summary = to_streamed_response_wrapper(
+            entities.retrieve_pnl_summary,
         )
-        self.get_portfolio_margin = to_streamed_response_wrapper(
-            entities.get_portfolio_margin,
+        self.retrieve_portfolio_margin = to_streamed_response_wrapper(
+            entities.retrieve_portfolio_margin,
         )
-        self.get_regt_margin = to_streamed_response_wrapper(
-            entities.get_regt_margin,
+        self.retrieve_regt_margin = to_streamed_response_wrapper(
+            entities.retrieve_regt_margin,
         )
-        self.get_regt_margin_simulation = to_streamed_response_wrapper(
-            entities.get_regt_margin_simulation,
+        self.retrieve_regt_margin_simulation = to_streamed_response_wrapper(
+            entities.retrieve_regt_margin_simulation,
         )
 
 
@@ -682,15 +682,15 @@ class AsyncEntitiesResourceWithStreamingResponse:
         self.create_regt_margin_simulation = async_to_streamed_response_wrapper(
             entities.create_regt_margin_simulation,
         )
-        self.get_pnl_summary = async_to_streamed_response_wrapper(
-            entities.get_pnl_summary,
+        self.retrieve_pnl_summary = async_to_streamed_response_wrapper(
+            entities.retrieve_pnl_summary,
         )
-        self.get_portfolio_margin = async_to_streamed_response_wrapper(
-            entities.get_portfolio_margin,
+        self.retrieve_portfolio_margin = async_to_streamed_response_wrapper(
+            entities.retrieve_portfolio_margin,
         )
-        self.get_regt_margin = async_to_streamed_response_wrapper(
-            entities.get_regt_margin,
+        self.retrieve_regt_margin = async_to_streamed_response_wrapper(
+            entities.retrieve_regt_margin,
         )
-        self.get_regt_margin_simulation = async_to_streamed_response_wrapper(
-            entities.get_regt_margin_simulation,
+        self.retrieve_regt_margin_simulation = async_to_streamed_response_wrapper(
+            entities.retrieve_regt_margin_simulation,
         )

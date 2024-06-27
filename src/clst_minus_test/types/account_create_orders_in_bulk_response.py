@@ -2,9 +2,9 @@
 
 from typing import List, Optional
 
-from ..._models import BaseModel
+from .._models import BaseModel
 
-__all__ = ["BulkOrderCreateResponse", "Data"]
+__all__ = ["AccountCreateOrdersInBulkResponse", "Data"]
 
 
 class Data(BaseModel):
@@ -24,7 +24,7 @@ class Data(BaseModel):
     """
 
 
-class BulkOrderCreateResponse(BaseModel):
+class AccountCreateOrdersInBulkResponse(BaseModel):
     data: List[Data]
     """Array indicating whether each respective order was submitted or not.
 
