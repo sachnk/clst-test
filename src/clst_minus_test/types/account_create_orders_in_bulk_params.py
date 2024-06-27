@@ -2,12 +2,18 @@
 
 from __future__ import annotations
 
+from typing import Iterable
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["OrderCreateParams"]
+__all__ = ["AccountCreateOrdersInBulkParams", "Order"]
 
 
-class OrderCreateParams(TypedDict, total=False):
+class AccountCreateOrdersInBulkParams(TypedDict, total=False):
+    orders: Required[Iterable[Order]]
+    """An array of orders to create."""
+
+
+class Order(TypedDict, total=False):
     order_type: Required[Literal["limit", "market"]]
     """The type of order, can be one of the following:
 

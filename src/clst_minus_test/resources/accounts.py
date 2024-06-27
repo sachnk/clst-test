@@ -2,69 +2,131 @@
 
 from __future__ import annotations
 
+from typing import Iterable
+
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
-from ..._utils import (
+from ..types import account_create_orders_in_bulk_params
+from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._utils import (
     maybe_transform,
     async_maybe_transform,
 )
-from ..._compat import cached_property
-from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import (
+from .._compat import cached_property
+from .._resource import SyncAPIResource, AsyncAPIResource
+from .._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..._base_client import (
+from .._base_client import (
     make_request_options,
 )
-from ...types.accounts import locate_order_create_params, locate_order_update_params
-from ...types.locate_order import LocateOrder
-from ...types.accounts.locate_order_list_response import LocateOrderListResponse
+from ..types.account import Account
+from ..types.shared.pnl_summary import PNLSummary
+from ..types.account_list_response import AccountListResponse
+from ..types.account_retrieve_pnl_details_response import AccountRetrievePNLDetailsResponse
+from ..types.account_create_orders_in_bulk_response import AccountCreateOrdersInBulkResponse
 
-__all__ = ["LocateOrdersResource", "AsyncLocateOrdersResource"]
+__all__ = ["AccountsResource", "AsyncAccountsResource"]
 
 
-class LocateOrdersResource(SyncAPIResource):
+class AccountsResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> LocateOrdersResourceWithRawResponse:
-        return LocateOrdersResourceWithRawResponse(self)
+    def with_raw_response(self) -> AccountsResourceWithRawResponse:
+        return AccountsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> LocateOrdersResourceWithStreamingResponse:
-        return LocateOrdersResourceWithStreamingResponse(self)
+    def with_streaming_response(self) -> AccountsResourceWithStreamingResponse:
+        return AccountsResourceWithStreamingResponse(self)
 
-    def create(
+    def retrieve(
         self,
         account_id: str,
         *,
-        mpid: str,
-        quantity: str,
-        reference_id: str,
-        symbol: str,
-        comments: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> LocateOrder:
+    ) -> Account:
         """
-        Create locate order to borrow inventory for short-selling.
+        Get an account by its ID.
 
         Args:
           account_id: Account ID for the account.
 
-          mpid: The market participant where the locate will be sent.
+          extra_headers: Send extra headers
 
-          quantity: String representation of quantity.
+          extra_query: Add additional query parameters to the request
 
-          reference_id: Your unique ID for this locate order.
+          extra_body: Add additional JSON properties to the request
 
-          comments: Any additional comments for the locate request.
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account_id:
+            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
+        return self._get(
+            f"/accounts/{account_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Account,
+        )
+
+    def list(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AccountListResponse:
+        """List all available accounts."""
+        return self._get(
+            "/accounts",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AccountListResponse,
+        )
+
+    def create_orders_in_bulk(
+        self,
+        account_id: str,
+        *,
+        orders: Iterable[account_create_orders_in_bulk_params.Order],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AccountCreateOrdersInBulkResponse:
+        """Creates multiple orders in a single request, up to 1000.
+
+        Note that a successful
+        call to this endpoint does not necessarily mean your orders have been accepted,
+        e.g. a downstream venue might reject your order. You should therefore utilize
+        our WebSocket APIs to listen for changes in order lifecycle events.
+
+        The response will contain an array of objects, indicating whether your order was
+        submitted. If the order was submitted, the `order_id` field will be populated
+        with the order ID assigned to this order. If the order was rejected, the
+        `reason` field will be populated with the reason for rejection. The data array
+        returned in the response object is guaranteed to be ordered in the same order as
+        the orders you provided in the request. Again, note that even if your order was
+        submitted, that doesn't mean it was _accepted_, and may still be rejected by
+        downstream venues.
+
+        Args:
+          account_id: Account ID for the account.
+
+          orders: An array of orders to create.
 
           extra_headers: Send extra headers
 
@@ -77,109 +139,17 @@ class LocateOrdersResource(SyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._post(
-            f"/accounts/{account_id}/locate-orders",
+            f"/accounts/{account_id}/bulk-orders",
             body=maybe_transform(
-                {
-                    "mpid": mpid,
-                    "quantity": quantity,
-                    "reference_id": reference_id,
-                    "symbol": symbol,
-                    "comments": comments,
-                },
-                locate_order_create_params.LocateOrderCreateParams,
+                {"orders": orders}, account_create_orders_in_bulk_params.AccountCreateOrdersInBulkParams
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=LocateOrder,
+            cast_to=AccountCreateOrdersInBulkResponse,
         )
 
-    def retrieve(
-        self,
-        locate_order_id: str,
-        *,
-        account_id: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> LocateOrder:
-        """
-        Get locate order by its unique locate order ID.
-
-        Args:
-          account_id: Account ID for the account.
-
-          locate_order_id: Locate order ID to get.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not account_id:
-            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
-        if not locate_order_id:
-            raise ValueError(f"Expected a non-empty value for `locate_order_id` but received {locate_order_id!r}")
-        return self._get(
-            f"/accounts/{account_id}/locate-orders/{locate_order_id}",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=LocateOrder,
-        )
-
-    def update(
-        self,
-        locate_order_id: str,
-        *,
-        account_id: str,
-        accept: bool,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
-        """
-        Accept or decline locate order that has been offered.
-
-        Args:
-          account_id: Account ID for the account.
-
-          locate_order_id: Unique locate ID assigned by us.
-
-          accept: Accept or decline the locate order.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not account_id:
-            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
-        if not locate_order_id:
-            raise ValueError(f"Expected a non-empty value for `locate_order_id` but received {locate_order_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        return self._patch(
-            f"/accounts/{account_id}/locate-orders/{locate_order_id}",
-            body=maybe_transform({"accept": accept}, locate_order_update_params.LocateOrderUpdateParams),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=NoneType,
-        )
-
-    def list(
+    def retrieve_pnl_details(
         self,
         account_id: str,
         *,
@@ -189,9 +159,9 @@ class LocateOrdersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> LocateOrderListResponse:
+    ) -> AccountRetrievePNLDetailsResponse:
         """
-        List all locate orders
+        List PNL details for a given account.
 
         Args:
           account_id: Account ID for the account.
@@ -207,52 +177,144 @@ class LocateOrdersResource(SyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._get(
-            f"/accounts/{account_id}/locate-orders",
+            f"/accounts/{account_id}/pnl-details",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=LocateOrderListResponse,
+            cast_to=AccountRetrievePNLDetailsResponse,
         )
 
-
-class AsyncLocateOrdersResource(AsyncAPIResource):
-    @cached_property
-    def with_raw_response(self) -> AsyncLocateOrdersResourceWithRawResponse:
-        return AsyncLocateOrdersResourceWithRawResponse(self)
-
-    @cached_property
-    def with_streaming_response(self) -> AsyncLocateOrdersResourceWithStreamingResponse:
-        return AsyncLocateOrdersResourceWithStreamingResponse(self)
-
-    async def create(
+    def retrieve_pnl_summary(
         self,
         account_id: str,
         *,
-        mpid: str,
-        quantity: str,
-        reference_id: str,
-        symbol: str,
-        comments: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> LocateOrder:
+    ) -> PNLSummary:
         """
-        Create locate order to borrow inventory for short-selling.
+        Get PNL summary for a given account.
 
         Args:
           account_id: Account ID for the account.
 
-          mpid: The market participant where the locate will be sent.
+          extra_headers: Send extra headers
 
-          quantity: String representation of quantity.
+          extra_query: Add additional query parameters to the request
 
-          reference_id: Your unique ID for this locate order.
+          extra_body: Add additional JSON properties to the request
 
-          comments: Any additional comments for the locate request.
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account_id:
+            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
+        return self._get(
+            f"/accounts/{account_id}/pnl-summary",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=PNLSummary,
+        )
+
+
+class AsyncAccountsResource(AsyncAPIResource):
+    @cached_property
+    def with_raw_response(self) -> AsyncAccountsResourceWithRawResponse:
+        return AsyncAccountsResourceWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncAccountsResourceWithStreamingResponse:
+        return AsyncAccountsResourceWithStreamingResponse(self)
+
+    async def retrieve(
+        self,
+        account_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> Account:
+        """
+        Get an account by its ID.
+
+        Args:
+          account_id: Account ID for the account.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account_id:
+            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
+        return await self._get(
+            f"/accounts/{account_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Account,
+        )
+
+    async def list(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AccountListResponse:
+        """List all available accounts."""
+        return await self._get(
+            "/accounts",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AccountListResponse,
+        )
+
+    async def create_orders_in_bulk(
+        self,
+        account_id: str,
+        *,
+        orders: Iterable[account_create_orders_in_bulk_params.Order],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AccountCreateOrdersInBulkResponse:
+        """Creates multiple orders in a single request, up to 1000.
+
+        Note that a successful
+        call to this endpoint does not necessarily mean your orders have been accepted,
+        e.g. a downstream venue might reject your order. You should therefore utilize
+        our WebSocket APIs to listen for changes in order lifecycle events.
+
+        The response will contain an array of objects, indicating whether your order was
+        submitted. If the order was submitted, the `order_id` field will be populated
+        with the order ID assigned to this order. If the order was rejected, the
+        `reason` field will be populated with the reason for rejection. The data array
+        returned in the response object is guaranteed to be ordered in the same order as
+        the orders you provided in the request. Again, note that even if your order was
+        submitted, that doesn't mean it was _accepted_, and may still be rejected by
+        downstream venues.
+
+        Args:
+          account_id: Account ID for the account.
+
+          orders: An array of orders to create.
 
           extra_headers: Send extra headers
 
@@ -265,109 +327,17 @@ class AsyncLocateOrdersResource(AsyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._post(
-            f"/accounts/{account_id}/locate-orders",
+            f"/accounts/{account_id}/bulk-orders",
             body=await async_maybe_transform(
-                {
-                    "mpid": mpid,
-                    "quantity": quantity,
-                    "reference_id": reference_id,
-                    "symbol": symbol,
-                    "comments": comments,
-                },
-                locate_order_create_params.LocateOrderCreateParams,
+                {"orders": orders}, account_create_orders_in_bulk_params.AccountCreateOrdersInBulkParams
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=LocateOrder,
+            cast_to=AccountCreateOrdersInBulkResponse,
         )
 
-    async def retrieve(
-        self,
-        locate_order_id: str,
-        *,
-        account_id: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> LocateOrder:
-        """
-        Get locate order by its unique locate order ID.
-
-        Args:
-          account_id: Account ID for the account.
-
-          locate_order_id: Locate order ID to get.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not account_id:
-            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
-        if not locate_order_id:
-            raise ValueError(f"Expected a non-empty value for `locate_order_id` but received {locate_order_id!r}")
-        return await self._get(
-            f"/accounts/{account_id}/locate-orders/{locate_order_id}",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=LocateOrder,
-        )
-
-    async def update(
-        self,
-        locate_order_id: str,
-        *,
-        account_id: str,
-        accept: bool,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
-        """
-        Accept or decline locate order that has been offered.
-
-        Args:
-          account_id: Account ID for the account.
-
-          locate_order_id: Unique locate ID assigned by us.
-
-          accept: Accept or decline the locate order.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not account_id:
-            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
-        if not locate_order_id:
-            raise ValueError(f"Expected a non-empty value for `locate_order_id` but received {locate_order_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        return await self._patch(
-            f"/accounts/{account_id}/locate-orders/{locate_order_id}",
-            body=await async_maybe_transform({"accept": accept}, locate_order_update_params.LocateOrderUpdateParams),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=NoneType,
-        )
-
-    async def list(
+    async def retrieve_pnl_details(
         self,
         account_id: str,
         *,
@@ -377,9 +347,9 @@ class AsyncLocateOrdersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> LocateOrderListResponse:
+    ) -> AccountRetrievePNLDetailsResponse:
         """
-        List all locate orders
+        List PNL details for a given account.
 
         Args:
           account_id: Account ID for the account.
@@ -395,81 +365,128 @@ class AsyncLocateOrdersResource(AsyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._get(
-            f"/accounts/{account_id}/locate-orders",
+            f"/accounts/{account_id}/pnl-details",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=LocateOrderListResponse,
+            cast_to=AccountRetrievePNLDetailsResponse,
+        )
+
+    async def retrieve_pnl_summary(
+        self,
+        account_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> PNLSummary:
+        """
+        Get PNL summary for a given account.
+
+        Args:
+          account_id: Account ID for the account.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account_id:
+            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
+        return await self._get(
+            f"/accounts/{account_id}/pnl-summary",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=PNLSummary,
         )
 
 
-class LocateOrdersResourceWithRawResponse:
-    def __init__(self, locate_orders: LocateOrdersResource) -> None:
-        self._locate_orders = locate_orders
+class AccountsResourceWithRawResponse:
+    def __init__(self, accounts: AccountsResource) -> None:
+        self._accounts = accounts
 
-        self.create = to_raw_response_wrapper(
-            locate_orders.create,
-        )
         self.retrieve = to_raw_response_wrapper(
-            locate_orders.retrieve,
-        )
-        self.update = to_raw_response_wrapper(
-            locate_orders.update,
+            accounts.retrieve,
         )
         self.list = to_raw_response_wrapper(
-            locate_orders.list,
+            accounts.list,
+        )
+        self.create_orders_in_bulk = to_raw_response_wrapper(
+            accounts.create_orders_in_bulk,
+        )
+        self.retrieve_pnl_details = to_raw_response_wrapper(
+            accounts.retrieve_pnl_details,
+        )
+        self.retrieve_pnl_summary = to_raw_response_wrapper(
+            accounts.retrieve_pnl_summary,
         )
 
 
-class AsyncLocateOrdersResourceWithRawResponse:
-    def __init__(self, locate_orders: AsyncLocateOrdersResource) -> None:
-        self._locate_orders = locate_orders
+class AsyncAccountsResourceWithRawResponse:
+    def __init__(self, accounts: AsyncAccountsResource) -> None:
+        self._accounts = accounts
 
-        self.create = async_to_raw_response_wrapper(
-            locate_orders.create,
-        )
         self.retrieve = async_to_raw_response_wrapper(
-            locate_orders.retrieve,
-        )
-        self.update = async_to_raw_response_wrapper(
-            locate_orders.update,
+            accounts.retrieve,
         )
         self.list = async_to_raw_response_wrapper(
-            locate_orders.list,
+            accounts.list,
+        )
+        self.create_orders_in_bulk = async_to_raw_response_wrapper(
+            accounts.create_orders_in_bulk,
+        )
+        self.retrieve_pnl_details = async_to_raw_response_wrapper(
+            accounts.retrieve_pnl_details,
+        )
+        self.retrieve_pnl_summary = async_to_raw_response_wrapper(
+            accounts.retrieve_pnl_summary,
         )
 
 
-class LocateOrdersResourceWithStreamingResponse:
-    def __init__(self, locate_orders: LocateOrdersResource) -> None:
-        self._locate_orders = locate_orders
+class AccountsResourceWithStreamingResponse:
+    def __init__(self, accounts: AccountsResource) -> None:
+        self._accounts = accounts
 
-        self.create = to_streamed_response_wrapper(
-            locate_orders.create,
-        )
         self.retrieve = to_streamed_response_wrapper(
-            locate_orders.retrieve,
-        )
-        self.update = to_streamed_response_wrapper(
-            locate_orders.update,
+            accounts.retrieve,
         )
         self.list = to_streamed_response_wrapper(
-            locate_orders.list,
+            accounts.list,
+        )
+        self.create_orders_in_bulk = to_streamed_response_wrapper(
+            accounts.create_orders_in_bulk,
+        )
+        self.retrieve_pnl_details = to_streamed_response_wrapper(
+            accounts.retrieve_pnl_details,
+        )
+        self.retrieve_pnl_summary = to_streamed_response_wrapper(
+            accounts.retrieve_pnl_summary,
         )
 
 
-class AsyncLocateOrdersResourceWithStreamingResponse:
-    def __init__(self, locate_orders: AsyncLocateOrdersResource) -> None:
-        self._locate_orders = locate_orders
+class AsyncAccountsResourceWithStreamingResponse:
+    def __init__(self, accounts: AsyncAccountsResource) -> None:
+        self._accounts = accounts
 
-        self.create = async_to_streamed_response_wrapper(
-            locate_orders.create,
-        )
         self.retrieve = async_to_streamed_response_wrapper(
-            locate_orders.retrieve,
-        )
-        self.update = async_to_streamed_response_wrapper(
-            locate_orders.update,
+            accounts.retrieve,
         )
         self.list = async_to_streamed_response_wrapper(
-            locate_orders.list,
+            accounts.list,
+        )
+        self.create_orders_in_bulk = async_to_streamed_response_wrapper(
+            accounts.create_orders_in_bulk,
+        )
+        self.retrieve_pnl_details = async_to_streamed_response_wrapper(
+            accounts.retrieve_pnl_details,
+        )
+        self.retrieve_pnl_summary = async_to_streamed_response_wrapper(
+            accounts.retrieve_pnl_summary,
         )
