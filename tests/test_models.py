@@ -7,9 +7,9 @@ import pytest
 import pydantic
 from pydantic import Field
 
-from clst-test._utils import PropertyInfo
-from clst-test._compat import PYDANTIC_V2, parse_obj, model_dump, model_json
-from clst-test._models import BaseModel, construct_type
+from clst_minus_test._utils import PropertyInfo
+from clst_minus_test._compat import PYDANTIC_V2, parse_obj, model_dump, model_json
+from clst_minus_test._models import BaseModel, construct_type
 
 
 class BasicModel(BaseModel):

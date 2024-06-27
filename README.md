@@ -27,7 +27,7 @@ pip install git+ssh://git@github.com/stainless-sdks/clst-test-python.git
 The full API of this library can be found in [api.md](api.md).
 
 ```python
-from clst-test import Clearstreet
+from clst_minus_test import Clearstreet
 
 client = Clearstreet()
 
@@ -48,15 +48,17 @@ Simply import `AsyncClearstreet` instead of `Clearstreet` and use `await` with e
 
 ```python
 import asyncio
-from clst-test import AsyncClearstreet
+from clst_minus_test import AsyncClearstreet
 
 client = AsyncClearstreet()
 
+
 async def main() -> None:
-  instrument = await client.instruments.retrieve(
-      "REPLACE_ME",
-  )
-  print(instrument.asset_class)
+    instrument = await client.instruments.retrieve(
+        "REPLACE_ME",
+    )
+    print(instrument.asset_class)
+
 
 asyncio.run(main())
 ```
@@ -74,16 +76,16 @@ Typed requests and responses provide autocomplete and documentation within your 
 
 ## Handling errors
 
-When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `clst-test.APIConnectionError` is raised.
+When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `clst_minus_test.APIConnectionError` is raised.
 
 When the API returns a non-success status code (that is, 4xx or 5xx
-response), a subclass of `clst-test.APIStatusError` is raised, containing `status_code` and `response` properties.
+response), a subclass of `clst_minus_test.APIStatusError` is raised, containing `status_code` and `response` properties.
 
-All errors inherit from `clst-test.APIError`.
+All errors inherit from `clst_minus_test.APIError`.
 
 ```python
-import clst-test
-from clst-test import Clearstreet
+import clst_minus_test
+from clst_minus_test import Clearstreet
 
 client = Clearstreet()
 
@@ -91,12 +93,12 @@ try:
     client.instruments.retrieve(
         "REPLACE_ME",
     )
-except clst-test.APIConnectionError as e:
+except clst_minus_test.APIConnectionError as e:
     print("The server could not be reached")
-    print(e.__cause__) # an underlying Exception, likely raised within httpx.
-except clst-test.RateLimitError as e:
+    print(e.__cause__)  # an underlying Exception, likely raised within httpx.
+except clst_minus_test.RateLimitError as e:
     print("A 429 status code was received; we should back off a bit.")
-except clst-test.APIStatusError as e:
+except clst_minus_test.APIStatusError as e:
     print("Another non-200-range status code was received")
     print(e.status_code)
     print(e.response)
@@ -124,7 +126,7 @@ Connection errors (for example, due to a network connectivity problem), 408 Requ
 You can use the `max_retries` option to configure or disable retry settings:
 
 ```python
-from clst-test import Clearstreet
+from clst_minus_test import Clearstreet
 
 # Configure the default for all requests:
 client = Clearstreet(
@@ -133,7 +135,7 @@ client = Clearstreet(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries = 5).instruments.retrieve(
+client.with_options(max_retries=5).instruments.retrieve(
     "REPLACE_ME",
 )
 ```
@@ -144,7 +146,7 @@ By default requests time out after 1 minute. You can configure this with a `time
 which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/#fine-tuning-the-configuration) object:
 
 ```python
-from clst-test import Clearstreet
+from clst_minus_test import Clearstreet
 
 # Configure the default for all requests:
 client = Clearstreet(
@@ -158,7 +160,7 @@ client = Clearstreet(
 )
 
 # Override per-request:
-client.with_options(timeout = 5.0).instruments.retrieve(
+client.with_options(timeout=5.0).instruments.retrieve(
     "REPLACE_ME",
 )
 ```
@@ -196,7 +198,7 @@ if response.my_field is None:
 The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
 
 ```py
-from clst-test import Clearstreet
+from clst_minus_test import Clearstreet
 
 client = Clearstreet()
 response = client.instruments.with_raw_response.retrieve(
@@ -208,9 +210,9 @@ instrument = response.parse()  # get the object that `instruments.retrieve()` wo
 print(instrument.asset_class)
 ```
 
-These methods return an [`APIResponse`](https://github.com/stainless-sdks/clst-test-python/tree/main/src/clst-test/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/stainless-sdks/clst-test-python/tree/main/src/clst_minus_test/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/stainless-sdks/clst-test-python/tree/main/src/clst-test/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/stainless-sdks/clst-test-python/tree/main/src/clst_minus_test/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
@@ -221,11 +223,11 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 ```python
 with client.instruments.with_streaming_response.retrieve(
     "REPLACE_ME",
-) as response :
-    print(response.headers.get('X-My-Header'))
+) as response:
+    print(response.headers.get("X-My-Header"))
 
     for line in response.iter_lines():
-      print(line)
+        print(line)
 ```
 
 The context manager is required so that the response will reliably be closed.
@@ -271,15 +273,18 @@ You can directly override the [httpx client](https://www.python-httpx.org/api/#c
 
 - Support for proxies
 - Custom transports
-- Additional [advanced](https://www.python-httpx.org/advanced/#client-instances) functionality
+- Additional [advanced](https://www.python-httpx.org/advanced/clients/) functionality
 
 ```python
-from clst-test import Clearstreet, DefaultHttpxClient
+from clst_minus_test import Clearstreet, DefaultHttpxClient
 
 client = Clearstreet(
     # Or use the `CLEARSTREET_BASE_URL` env var
     base_url="http://my.test.server.example.com:8083",
-    http_client=DefaultHttpxClient(proxies="http://my.test.proxy.example.com", transport=httpx.HTTPTransport(local_address="0.0.0.0")),
+    http_client=DefaultHttpxClient(
+        proxies="http://my.test.proxy.example.com",
+        transport=httpx.HTTPTransport(local_address="0.0.0.0"),
+    ),
 )
 ```
 

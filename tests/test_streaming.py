@@ -5,8 +5,8 @@ from typing import Iterator, AsyncIterator
 import httpx
 import pytest
 
-from clst-test import Clearstreet, AsyncClearstreet
-from clst-test._streaming import Stream, AsyncStream, ServerSentEvent
+from clst_minus_test import Clearstreet, AsyncClearstreet
+from clst_minus_test._streaming import Stream, AsyncStream, ServerSentEvent
 
 
 @pytest.mark.asyncio
@@ -28,9 +28,7 @@ async def test_basic(sync: bool, client: Clearstreet, async_client: AsyncClearst
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize("sync", [True, False], ids=["sync", "async"])
-async def test_data_missing_event(
-    sync: bool, client: Clearstreet, async_client: AsyncClearstreet
-) -> None:
+async def test_data_missing_event(sync: bool, client: Clearstreet, async_client: AsyncClearstreet) -> None:
     def body() -> Iterator[bytes]:
         yield b'data: {"foo":true}\n'
         yield b"\n"
@@ -46,9 +44,7 @@ async def test_data_missing_event(
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize("sync", [True, False], ids=["sync", "async"])
-async def test_event_missing_data(
-    sync: bool, client: Clearstreet, async_client: AsyncClearstreet
-) -> None:
+async def test_event_missing_data(sync: bool, client: Clearstreet, async_client: AsyncClearstreet) -> None:
     def body() -> Iterator[bytes]:
         yield b"event: ping\n"
         yield b"\n"
@@ -64,9 +60,7 @@ async def test_event_missing_data(
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize("sync", [True, False], ids=["sync", "async"])
-async def test_multiple_events(
-    sync: bool, client: Clearstreet, async_client: AsyncClearstreet
-) -> None:
+async def test_multiple_events(sync: bool, client: Clearstreet, async_client: AsyncClearstreet) -> None:
     def body() -> Iterator[bytes]:
         yield b"event: ping\n"
         yield b"\n"
@@ -88,9 +82,7 @@ async def test_multiple_events(
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize("sync", [True, False], ids=["sync", "async"])
-async def test_multiple_events_with_data(
-    sync: bool, client: Clearstreet, async_client: AsyncClearstreet
-) -> None:
+async def test_multiple_events_with_data(sync: bool, client: Clearstreet, async_client: AsyncClearstreet) -> None:
     def body() -> Iterator[bytes]:
         yield b"event: ping\n"
         yield b'data: {"foo":true}\n'
@@ -157,9 +149,7 @@ async def test_data_json_escaped_double_new_line(
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize("sync", [True, False], ids=["sync", "async"])
-async def test_multiple_data_lines(
-    sync: bool, client: Clearstreet, async_client: AsyncClearstreet
-) -> None:
+async def test_multiple_data_lines(sync: bool, client: Clearstreet, async_client: AsyncClearstreet) -> None:
     def body() -> Iterator[bytes]:
         yield b"event: ping\n"
         yield b"data: {\n"
