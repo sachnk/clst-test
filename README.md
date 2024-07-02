@@ -16,7 +16,7 @@ The REST API documentation can be found [on docs.clst-test.com](https://docs.cls
 
 ```sh
 # install from the production repo
-pip install git+ssh://git@github.com/undefined/clst-test.git
+pip install git+ssh://git@github.com/sachnk/clst-test-python.git
 ```
 
 > [!NOTE]
@@ -210,9 +210,9 @@ instrument = response.parse()  # get the object that `instruments.retrieve()` wo
 print(instrument.asset_class)
 ```
 
-These methods return an [`APIResponse`](https://github.com/undefined/clst-test/tree/main/src/clst_minus_test/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/sachnk/clst-test-python/tree/main/src/clst_minus_test/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/undefined/clst-test/tree/main/src/clst_minus_test/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/sachnk/clst-test-python/tree/main/src/clst_minus_test/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
@@ -302,7 +302,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/undefined/clst-test/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/sachnk/clst-test-python/issues) with questions, bugs, or suggestions.
 
 ## Requirements
 
