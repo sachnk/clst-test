@@ -1,6 +1,6 @@
 [project]
 name = "clst-test"
-version = "0.0.1-alpha.0"
+version = "0.1.0-alpha.1"
 description = "The official Python library for the clearstreet API"
 dynamic = ["readme"]
 license = "Apache-2.0"
@@ -39,8 +39,8 @@ classifiers = [
 
 
 [project.urls]
-Homepage = "https://github.com/undefined/clst-test"
-Repository = "https://github.com/undefined/clst-test"
+Homepage = "https://github.com/sachnk/clst-test-python"
+Repository = "https://github.com/sachnk/clst-test-python"
 
 
 
@@ -124,7 +124,7 @@ path = "README.md"
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
 # replace relative links with absolute links
 pattern = '\[(.+?)\]\(((?!https?://)\S+?)\)'
-replacement = '[\1](https://github.com/undefined/clst-test/tree/main/\g<2>)'
+replacement = '[\1](https://github.com/sachnk/clst-test-python/tree/main/\g<2>)'
 
 [tool.black]
 line-length = 120
